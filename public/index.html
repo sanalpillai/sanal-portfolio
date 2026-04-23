@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Sanal Pillai — Growth & Product Analytics</title>
+<meta name="description" content="Growth & product analytics leader with 6+ years of experience driving acquisition, activation, lifecycle optimization, experimentation, & monetization strategy."/>
+<meta property="og:title" content="Sanal Pillai — Growth & Product Analytics"/>
+<meta property="og:description" content="Senior Business Analyst. Previously at Stripe, BCG, Avanzar Health, and Mety Technology."/>
+<meta property="og:type" content="website"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--card:#111113;--card2:#18181b;--border:rgba(255,255,255,.06);
+  --border-h:rgba(255,255,255,.14);--text:#fafafa;--muted:#a1a1aa;--dim:#52525b;
+  --accent:#10b981;--accent2:#06b6d4;--accent3:#8b5cf6;--accent-glow:rgba(16,185,129,.12);
+  --radius:14px;--col:720px;
+}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--dim) var(--bg)}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;cursor:default}
+.mono{font-family:'JetBrains Mono',monospace}
+.serif{font-family:'Crimson Pro',serif;font-style:italic}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(16,185,129,.25);color:#fff}
+
+/* ═══ SCROLL PROGRESS ═══ */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));z-index:1001;width:0;transition:none}
+
+/* ═══ MOUSE SPOTLIGHT ═══ */
+#spotlight{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.07),transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .4s}
+
+/* ═══ PARTICLE CANVAS ═══ */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
+
+/* ═══ NOISE OVERLAY ═══ */
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");pointer-events:none;z-index:1}
+
+/* ═══ REVEAL ANIMATIONS ═══ */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.4s}
+/* Blur-fade variant */
+.blur-in{opacity:0;filter:blur(8px);transform:translateY(20px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.blur-in.visible{opacity:1;filter:blur(0);transform:translateY(0)}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0;transition:all .5s cubic-bezier(.16,1,.3,1)}
+nav.scrolled{background:rgba(9,9,11,.82);backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--col);margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.nav-name{font-weight:600;font-size:.88rem;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.nav-logo{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--bg);font-size:.75rem;flex-shrink:0}
+.nav-links{display:flex;gap:2px}
+.nav-links a{padding:6px 12px;font-size:.78rem;color:var(--muted);border-radius:8px;transition:all .25s;position:relative}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.nav-links a.active{color:var(--text)}
+.nav-cta{padding:8px 18px;font-size:.75rem;font-weight:500;background:var(--text);color:var(--bg);border-radius:8px;transition:all .3s;cursor:pointer}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 4px 20px rgba(255,255,255,.1)}
+@media(max-width:640px){.nav-links{display:none}.nav-inner{padding:14px 20px}}
+
+/* ═══ LAYOUT ═══ */
+.container{max-width:var(--col);margin:0 auto;padding:0 24px;position:relative;z-index:2}
+section{padding:80px 0}
+@media(max-width:640px){section{padding:56px 0}.container{padding:0 20px}}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;position:relative}
+/* Gradient mesh blobs */
+.hero-blob{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;animation:blobFloat 8s ease-in-out infinite alternate}
+.hero-blob-1{width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,.10),transparent 70%);top:-100px;left:-200px}
+.hero-blob-2{width:400px;height:400px;background:radial-gradient(circle,rgba(6,182,212,.07),transparent 70%);bottom:0;right:-150px;animation-delay:-3s}
+.hero-blob-3{width:300px;height:300px;background:radial-gradient(circle,rgba(139,92,246,.06),transparent 70%);top:40%;left:50%;animation-delay:-5s}
+@keyframes blobFloat{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.1)}100%{transform:translate(-20px,30px) scale(.95)}}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:24px;font-size:.7rem;color:var(--muted);margin-bottom:28px;transition:all .3s}
+.hero-badge:hover{border-color:var(--accent);color:var(--accent)}
+.hero-badge .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 8px var(--accent)}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,.4)}50%{opacity:.5;box-shadow:0 0 0 10px rgba(16,185,129,0)}}
+
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:300;line-height:1.12;letter-spacing:-.04em;margin-bottom:8px}
+.hero h1 strong{font-weight:700}
+.hero h1 .name-highlight{position:relative;display:inline-block}
+.hero h1 .name-highlight::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.hero h1:hover .name-highlight::after{transform:scaleX(1)}
+
+/* Typewriter */
+.typewriter-line{display:block;min-height:1.3em;margin-top:4px}
+#typewriter{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600}
+.cursor-blink{display:inline-block;width:2px;height:.85em;background:var(--accent);margin-left:2px;animation:blink .8s step-end infinite;vertical-align:text-bottom;border-radius:1px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-desc{font-size:.92rem;color:var(--muted);max-width:520px;margin:24px 0;line-height:1.85}
+.hero-desc strong{color:var(--text);font-weight:500}
+.hero-meta{font-size:.78rem;color:var(--dim);margin-bottom:28px;padding-left:14px;border-left:2px solid var(--accent)}
+.hero-btns{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+
+/* Magnetic buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:11px 22px;border-radius:9px;font-size:.84rem;font-weight:500;transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer;border:none;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);opacity:0;transition:opacity .3s}
+.btn:hover::before{opacity:1}
+.btn-primary{background:var(--text);color:var(--bg)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,.12)}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost:hover{color:var(--text);border-color:var(--border-h);background:rgba(255,255,255,.03);transform:translateY(-2px)}
+.btn .arrow{display:inline-block;transition:transform .3s}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn:hover .arrow-down{transform:translateY(2px)}
+
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:4px 10px;font-size:.65rem;font-family:'JetBrains Mono',monospace;color:var(--dim);border:1px solid var(--border);border-radius:6px;transition:all .35s;cursor:default}
+.tag:hover{color:var(--accent);border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.04);transform:translateY(-1px)}
+
+/* ═══ MARQUEE METRICS ═══ */
+.marquee-section{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;overflow:hidden;position:relative;z-index:2}
+.marquee-track{display:flex;animation:marqueeScroll 30s linear infinite;width:max-content}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{display:flex;align-items:center;gap:12px;padding:20px 40px;white-space:nowrap;border-right:1px solid var(--border)}
+.marquee-val{font-size:1.3rem;font-weight:700;font-family:'JetBrains Mono',monospace;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.marquee-label{font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;max-width:100px;line-height:1.3}
+@keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══ SECTION HEADERS ═══ */
+.sec-label{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--dim);margin-bottom:16px}
+.sec-label::before{content:'';width:8px;height:1px;background:var(--accent)}
+.sec-title{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:400;margin-bottom:10px;letter-spacing:-.02em}
+/* Scramble hover on titles */
+.sec-title[data-scramble]{cursor:default;transition:letter-spacing .3s}
+.sec-title[data-scramble]:hover{letter-spacing:.01em}
+.sec-sub{color:var(--muted);font-size:.88rem;max-width:480px;margin-bottom:32px;line-height:1.7}
+
+/* ═══ ABOUT ═══ */
+.about-text{font-size:.88rem;color:#ccc;line-height:1.9}
+.about-text p{margin-bottom:16px}
+.highlight-word{color:var(--accent);font-weight:500;position:relative}
+.highlight-word::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--accent);opacity:.3}
+
+/* ═══ FRAMEWORK / HOW I THINK ═══ */
+.framework-grid{display:grid;gap:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+.framework-step{background:var(--card);padding:20px 24px;display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;transition:all .4s;cursor:default;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.framework-step:last-child{border-bottom:none}
+.framework-step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(16,185,129,.06),transparent);transition:width .5s cubic-bezier(.16,1,.3,1)}
+.framework-step:hover::before{width:100%}
+.framework-step:hover{background:var(--card2)}
+.step-num{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(16,185,129,.15);transition:all .3s}
+.framework-step:hover .step-num{background:var(--accent);color:var(--bg);border-color:var(--accent);box-shadow:0 0 20px rgba(16,185,129,.25)}
+.step-title{font-size:.85rem;font-weight:600;margin-bottom:4px}
+.step-desc{font-size:.76rem;color:var(--muted);line-height:1.65}
+
+/* ═══ EXPERIENCE TIMELINE ═══ */
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;left:15px;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent2),var(--accent3),var(--dim),transparent)}
+.timeline-item{position:relative;padding-left:48px;margin-bottom:36px;transition:all .3s}
+.timeline-dot{position:absolute;left:9px;top:7px;width:13px;height:13px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);z-index:1;transition:all .4s}
+.timeline-item:hover .timeline-dot{background:var(--accent);box-shadow:0 0 16px rgba(16,185,129,.4);transform:scale(1.2)}
+.timeline-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:all .4s}
+.timeline-item:hover .timeline-card{border-color:var(--border-h);transform:translateX(4px);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.timeline-company{font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.timeline-company-tag{padding:2px 8px;font-size:.55rem;font-family:'JetBrains Mono',monospace;border-radius:4px;font-weight:500;text-transform:uppercase;letter-spacing:.05em}
+.timeline-role{font-size:.78rem;color:var(--muted);margin-top:2px}
+.timeline-date{font-size:.68rem;font-family:'JetBrains Mono',monospace;color:var(--dim);margin-top:4px}
+.timeline-desc{font-size:.76rem;color:var(--dim);margin-top:8px;line-height:1.7}
+
+/* ═══ CASE STUDIES ═══ */
+.case-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;transition:all .4s cubic-bezier(.16,1,.3,1);cursor:pointer;position:relative}
+/* Glow border on hover */
+.case-card::after{content:'';position:absolute;inset:-1px;border-radius:var(--radius);background:linear-gradient(135deg,rgba(16,185,129,.2),rgba(6,182,212,.15),rgba(139,92,246,.1));opacity:0;transition:opacity .4s;z-index:-1}
+.case-card:hover::after{opacity:1}
+.case-card:hover{border-color:transparent;transform:translateY(-3px);box-shadow:0 8px 40px rgba(0,0,0,.3)}
+.case-card-header{padding:20px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.case-tag{padding:3px 8px;font-size:.6rem;font-family:'JetBrains Mono',monospace;border-radius:4px;white-space:nowrap}
+.case-tag.fintech{background:rgba(6,182,212,.1);color:var(--accent2);border:1px solid rgba(6,182,212,.2)}
+.case-tag.health{background:rgba(16,185,129,.1);color:var(--accent);border:1px solid rgba(16,185,129,.2)}
+.case-title{font-size:.92rem;font-weight:600;margin-bottom:3px}
+.case-meta{font-size:.72rem;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.case-chevron{transition:transform .4s cubic-bezier(.16,1,.3,1);color:var(--dim);font-size:.8rem;flex-shrink:0;margin-top:4px}
+.case-body{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1)}
+.case-card.open .case-body{max-height:700px}
+.case-card.open .case-chevron{transform:rotate(180deg)}
+.case-inner{padding:0 20px 20px;border-top:1px solid var(--border)}
+.case-section{margin-top:16px}
+.case-section h4{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.case-section p{font-size:.8rem;color:#bbb;line-height:1.75}
+.case-metrics{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.case-metric{padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:.7rem;font-family:'JetBrains Mono',monospace;transition:all .3s}
+.case-metric:hover{border-color:var(--accent)}
+.case-metric span{color:var(--accent);font-weight:600}
+
+/* ═══ SKILLS — ANIMATED BARS ═══ */
+.skills-grouped{display:grid;gap:24px}
+.skill-group h3{font-size:.75rem;font-family:'JetBrains Mono',monospace;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.skill-group h3::before{content:'//';color:var(--dim)}
+.skill-chips{display:flex;flex-wrap:wrap;gap:6px}
+.skill-chip{padding:6px 12px;background:var(--card);border:1px solid var(--border);border-radius:7px;font-size:.72rem;color:var(--muted);transition:all .35s;cursor:default;position:relative;overflow:hidden}
+.skill-chip::before{content:'';position:absolute;bottom:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .6s cubic-bezier(.16,1,.3,1)}
+.skill-chip:hover::before{width:100%}
+.skill-chip:hover{border-color:rgba(16,185,129,.25);color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+
+/* ═══ DOMAINS ═══ */
+.domain-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.domain-pill{padding:10px 18px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:10px;transition:all .4s;cursor:default}
+.domain-pill:hover{border-color:var(--border-h);color:var(--text);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.domain-dot{width:8px;height:8px;border-radius:3px;transition:transform .3s}
+.domain-pill:hover .domain-dot{transform:scale(1.3)}
+
+/* ═══ SIDE PROJECT ═══ */
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .4s}
+.project-card:hover{border-color:var(--border-h);box-shadow:0 8px 40px rgba(0,0,0,.3)}
+.project-header{padding:22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px}
+.project-body{padding:22px}
+.project-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.project-stat{text-align:center;padding:14px 10px;background:var(--bg);border:1px solid var(--border);border-radius:10px;transition:all .3s}
+.project-stat:hover{border-color:var(--border-h);transform:translateY(-2px)}
+.project-stat .val{font-size:1.1rem;font-weight:600;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:2px}
+.project-stat .lbl{font-size:.58rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:640px){.project-stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ═══ TESTIMONIALS ═══ */
+.testimonial-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:12px;position:relative;transition:all .4s;overflow:hidden}
+.testimonial-card::before{content:'\201C';position:absolute;top:8px;right:18px;font-size:3rem;color:var(--accent);opacity:.1;font-family:'Crimson Pro',serif}
+.testimonial-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),transparent);opacity:0;transition:opacity .4s}
+.testimonial-card:hover::after{opacity:1}
+.testimonial-card:hover{border-color:var(--border-h);transform:translateX(4px)}
+.testimonial-text{font-size:.82rem;color:#bbb;line-height:1.85;font-style:italic;margin-bottom:14px}
+.testimonial-footer{display:flex;align-items:center;gap:10px}
+.testimonial-avatar{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.65rem;color:var(--bg);flex-shrink:0}
+.testimonial-author{font-size:.75rem;font-weight:600;color:var(--text)}
+.testimonial-role{font-size:.65rem;color:var(--dim)}
+
+/* ═══ EDUCATION ═══ */
+.edu-item{padding:16px 0;border-bottom:1px solid var(--border);transition:all .3s}
+.edu-item:last-child{border-bottom:none}
+.edu-item:hover{padding-left:8px}
+.edu-school{font-size:.85rem;font-weight:600}
+.edu-degree{font-size:.78rem;color:var(--muted)}
+.edu-date{font-size:.68rem;font-family:'JetBrains Mono',monospace;color:var(--dim)}
+
+/* ═══ CERTS ═══ */
+.cert-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.cert-badge{padding:6px 12px;background:var(--card);border:1px solid var(--border);border-radius:7px;font-size:.68rem;color:var(--muted);transition:all .35s;cursor:default}
+.cert-badge:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+/* ═══ INTERESTS ═══ */
+.interest-item{padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;font-size:.82rem;color:#bbb;display:flex;align-items:center;gap:12px;transition:all .4s;cursor:default}
+.interest-item:hover{border-color:var(--border-h);transform:translateX(6px);background:var(--card2)}
+.interest-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all .3s}
+.interest-item:hover .interest-icon{transform:scale(1.1)}
+
+/* ═══ CONTACT ═══ */
+.contact-section{text-align:center;padding:100px 0}
+.contact-section .sec-label{justify-content:center}
+.contact-links{display:flex;justify-content:center;gap:14px;margin-top:28px;flex-wrap:wrap}
+.contact-link{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 28px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);transition:all .4s;min-width:150px;position:relative;overflow:hidden}
+.contact-link::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(16,185,129,.04),transparent);opacity:0;transition:opacity .3s}
+.contact-link:hover::before{opacity:1}
+.contact-link:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 30px rgba(16,185,129,.08)}
+.contact-link .label{font-size:.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.contact-link .value{font-size:.8rem;color:var(--text);font-weight:500}
+@media(max-width:640px){.contact-links{flex-direction:column;align-items:center}}
+
+/* ═══ FOOTER ═══ */
+footer{border-top:1px solid var(--border);padding:24px 0;text-align:center}
+footer span{font-size:.68rem;color:var(--dim);font-family:'JetBrains Mono',monospace}
+
+/* ═══ SCROLL TOP ═══ */
+#scroll-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:10px;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:1rem;cursor:pointer;z-index:99;opacity:0;transform:translateY(10px);transition:all .4s;display:flex;align-items:center;justify-content:center}
+#scroll-top.show{opacity:1;transform:translateY(0)}
+#scroll-top:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px rgba(16,185,129,.15)}
+
+/* ═══ DIVIDER ═══ */
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 auto;max-width:200px}
+</style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+<div id="spotlight"></div>
+<canvas id="particles"></canvas>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-name"><div class="nav-logo">SP</div>Sanal Pillai</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Work</a>
+      <a href="#cases">Cases</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="container">
+    <div class="hero-badge blur-in"><span class="dot"></span>Available for opportunities</div>
+    <h1 class="blur-in d1">
+      I'm <strong><span class="name-highlight">Sanal Pillai</span></strong>,<br/>
+      <span class="typewriter-line">a <span id="typewriter"></span><span class="cursor-blink"></span></span>
+    </h1>
+    <p class="hero-desc blur-in d2">
+      <strong>6+ years</strong> driving acquisition, activation, lifecycle optimization, experimentation, and monetization strategy across <strong>fintech, healthtech, consulting</strong>, and <strong>consumer products</strong>.
+    </p>
+    <p class="hero-meta blur-in d2">BCG · Stripe · Avanzar Health · Mety Technology</p>
+    <div class="hero-btns blur-in d3">
+      <a href="#cases" class="btn btn-primary">View Case Studies <span class="arrow arrow-down">↓</span></a>
+      <a href="#contact" class="btn btn-ghost">Download Resume <span class="arrow">→</span></a>
+    </div>
+    <div class="hero-tags blur-in d4">
+      <span class="tag">Growth Analytics</span>
+      <span class="tag">Experimentation</span>
+      <span class="tag">Funnel Optimization</span>
+      <span class="tag">Lifecycle & Retention</span>
+      <span class="tag">Attribution Modeling</span>
+      <span class="tag">Revenue Analytics</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE METRICS ═══ -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-val">$14M</span><span class="marquee-label">Revenue Sized via Experiments</span></div>
+    <div class="marquee-item"><span class="marquee-val">1.6M+</span><span class="marquee-label">Lifecycle Events Analyzed</span></div>
+    <div class="marquee-item"><span class="marquee-val">$9M</span><span class="marquee-label">Media Spend Modeled</span></div>
+    <div class="marquee-item"><span class="marquee-val">$3.2M</span><span class="marquee-label">Contract Value Influenced</span></div>
+    <div class="marquee-item"><span class="marquee-val">380K+</span><span class="marquee-label">Sign-ups Evaluated</span></div>
+    <div class="marquee-item"><span class="marquee-val">1.1M+</span><span class="marquee-label">Health Profiles Analyzed</span></div>
+    <div class="marquee-item"><span class="marquee-val">60+</span><span class="marquee-label">Clients Served</span></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="marquee-item"><span class="marquee-val">$14M</span><span class="marquee-label">Revenue Sized via Experiments</span></div>
+    <div class="marquee-item"><span class="marquee-val">1.6M+</span><span class="marquee-label">Lifecycle Events Analyzed</span></div>
+    <div class="marquee-item"><span class="marquee-val">$9M</span><span class="marquee-label">Media Spend Modeled</span></div>
+    <div class="marquee-item"><span class="marquee-val">$3.2M</span><span class="marquee-label">Contract Value Influenced</span></div>
+    <div class="marquee-item"><span class="marquee-val">380K+</span><span class="marquee-label">Sign-ups Evaluated</span></div>
+    <div class="marquee-item"><span class="marquee-val">1.1M+</span><span class="marquee-label">Health Profiles Analyzed</span></div>
+    <div class="marquee-item"><span class="marquee-val">60+</span><span class="marquee-label">Clients Served</span></div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="sec-label reveal">About</div>
+    <h2 class="sec-title reveal" data-scramble>The <span class="serif">short version</span></h2>
+    <div class="about-text reveal d1">
+      <p>I'm a growth and product analytics leader who's spent 6+ years at the intersection of <span class="highlight-word">data</span>, <span class="highlight-word">product</span>, and <span class="highlight-word">business strategy</span>. I've worked at BCG building financial models for Fortune 500 clients, at Stripe sizing monetization experiments and diagnosing acquisition funnels, at Avanzar leading analytics across 60+ healthcare clients, and most recently at Mety measuring AI recommendation impact on user behavior.</p>
+      <p>I care about one thing: making sure the numbers actually change the decision. Not dashboards for dashboards' sake — but the kind of analysis that makes a PM reprioritize their roadmap or a VP reallocate budget mid-quarter.</p>
+      <p style="color:var(--dim);font-style:italic;font-size:.84rem">M.S. in Information Systems from Northeastern · B.E. in Computer Science from University of Mumbai · I think in funnels, experiment in cohorts, and present in narratives.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ HOW I THINK ═══ -->
+<section>
+  <div class="container">
+    <div class="sec-label reveal">Framework</div>
+    <h2 class="sec-title reveal" data-scramble>How I approach a <span class="serif">growth problem</span></h2>
+    <p class="sec-sub reveal">My analytical process, from ambiguity to action.</p>
+    <div class="framework-grid reveal d1">
+      <div class="framework-step"><div class="step-num">01</div><div><div class="step-title">Map the System</div><div class="step-desc">Understand the full user journey and business model before touching data. What are the levers? Where does value get created or lost?</div></div></div>
+      <div class="framework-step"><div class="step-num">02</div><div><div class="step-title">Instrument & Measure</div><div class="step-desc">Define the right KPIs, ensure clean instrumentation, and establish baselines. Bad data in, bad decisions out.</div></div></div>
+      <div class="framework-step"><div class="step-num">03</div><div><div class="step-title">Diagnose the Funnel</div><div class="step-desc">Find the structural drop-offs. Is it acquisition, activation, retention, or monetization? Each demands a different playbook.</div></div></div>
+      <div class="framework-step"><div class="step-num">04</div><div><div class="step-title">Size & Prioritize</div><div class="step-desc">Not every insight deserves an experiment. Size the opportunity, estimate effort, and stack-rank ruthlessly.</div></div></div>
+      <div class="framework-step"><div class="step-num">05</div><div><div class="step-title">Experiment & Measure</div><div class="step-desc">Design the test, define success criteria upfront, run it cleanly, and read it out honestly — including when it doesn't work.</div></div></div>
+      <div class="framework-step"><div class="step-num">06</div><div><div class="step-title">Operationalize</div><div class="step-desc">If it works, scale it. Build the reporting, automate tracking, document the logic, and hand it off so it runs without you.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-label reveal">Experience</div>
+    <h2 class="sec-title reveal" data-scramble>Where I've <span class="serif">worked</span></h2>
+    <div class="timeline">
+      <div class="timeline-item reveal d1">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-company">Mety Technology <span class="timeline-company-tag" style="background:rgba(16,185,129,.1);color:var(--accent)">Latest</span></div>
+          <div class="timeline-role">Senior Business Analyst, Product & Data Growth Analytics</div>
+          <div class="timeline-date">May 2025 – Apr 2026 · Boston, MA</div>
+          <div class="timeline-desc">Analyzed 1.1M+ health profiles, measured AI recommendation impact across 25K+ plans, built lifecycle funnel models from onboarding to sustained engagement.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal d2">
+        <div class="timeline-dot" style="border-color:var(--accent2)"></div>
+        <div class="timeline-card">
+          <div class="timeline-company">Avanzar Health</div>
+          <div class="timeline-role">Business Director, Product Analytics & Growth Strategy</div>
+          <div class="timeline-date">Jan 2020 – July 2023 · Mumbai, India</div>
+          <div class="timeline-desc">Owned analytics for 60+ healthcare clients. Built attribution models across $9M in media spend. Drove $3.2M in incremental contract value through growth performance narratives.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal d3">
+        <div class="timeline-dot" style="border-color:var(--accent3)"></div>
+        <div class="timeline-card">
+          <div class="timeline-company">Stripe</div>
+          <div class="timeline-role">Senior Business Analyst, Product Analytics & Payments Strategy</div>
+          <div class="timeline-date">Apr 2019 – Dec 2019 · Mumbai, India</div>
+          <div class="timeline-desc">Evaluated 380K+ sign-ups across channels, sized $14M in subscription revenue experiments, analyzed 1.6M+ lifecycle events for cross-sell prioritization.</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal d4">
+        <div class="timeline-dot" style="border-color:var(--dim)"></div>
+        <div class="timeline-card">
+          <div class="timeline-company">Boston Consulting Group</div>
+          <div class="timeline-role">Business Intelligence & Analytics Associate</div>
+          <div class="timeline-date">Apr 2018 – Mar 2019 · Mumbai, India</div>
+          <div class="timeline-desc">Built scenario models for cost drivers and revenue sensitivities. Maintained 8–12 structured analytical workbooks per engagement.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ CASE STUDIES ═══ -->
+<section id="cases">
+  <div class="container">
+    <div class="sec-label reveal">Case Studies</div>
+    <h2 class="sec-title reveal" data-scramble>Selected <span class="serif">work</span></h2>
+    <p class="sec-sub reveal">Click any card to expand the full story.</p>
+
+    <div class="case-card reveal d1" onclick="toggleCase(this)">
+      <div class="case-card-header">
+        <div><div class="case-title">Acquisition Funnel Diagnostics</div><div class="case-meta">Stripe · 380K+ sign-ups analyzed</div></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="case-tag fintech">Fintech</span><span class="case-chevron">▾</span></div>
+      </div>
+      <div class="case-body"><div class="case-inner">
+        <div class="case-section"><h4>The Problem</h4><p>380K+ new users were entering through paid search, referrals, organic, and lifecycle email — but activation rates varied wildly, and nobody had a clear picture of where and why users were dropping off.</p></div>
+        <div class="case-section"><h4>Approach</h4><p>Segmented sign-ups by entry point and mapped each cohort through the onboarding flow. Identified messaging mismatches between acquisition promise and activation experience. Quantified drop-off at each step.</p></div>
+        <div class="case-section"><h4>Outcome</h4><p>Findings directly informed onboarding experiments. Surfaced that lifecycle email entrants had 2.3x higher activation when onboarding was personalized to their referral context.</p></div>
+        <div class="case-metrics"><span class="case-metric"><span>380K+</span> sign-ups</span><span class="case-metric"><span>2.3x</span> activation lift</span><span class="case-metric"><span>4</span> channels mapped</span></div>
+      </div></div>
+    </div>
+
+    <div class="case-card reveal d2" onclick="toggleCase(this)">
+      <div class="case-card-header">
+        <div><div class="case-title">Monetization Experiment Sizing</div><div class="case-meta">Stripe · $14M annualized revenue evaluated</div></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="case-tag fintech">Fintech</span><span class="case-chevron">▾</span></div>
+      </div>
+      <div class="case-body"><div class="case-inner">
+        <div class="case-section"><h4>The Problem</h4><p>Leadership needed to understand the annualized revenue impact of pricing, feature gating, and trial-length experiments before committing engineering resources.</p></div>
+        <div class="case-section"><h4>Approach</h4><p>Built a sizing framework modeling incremental impact on conversion and early retention cohorts. Evaluated $14M in annualized subscription revenue across experiment types to rank by expected lift.</p></div>
+        <div class="case-section"><h4>Outcome</h4><p>Framework became the standard for experiment prioritization. Two pricing presentation changes shipped to production with measurable uplift in early-cohort retention.</p></div>
+        <div class="case-metrics"><span class="case-metric"><span>$14M</span> revenue sized</span><span class="case-metric"><span>2</span> experiments shipped</span><span class="case-metric"><span>Template</span> adopted org-wide</span></div>
+      </div></div>
+    </div>
+
+    <div class="case-card reveal d3" onclick="toggleCase(this)">
+      <div class="case-card-header">
+        <div><div class="case-title">Attribution & Incrementality Modeling</div><div class="case-meta">Avanzar Health · $9M in annual media spend</div></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="case-tag health">Healthcare</span><span class="case-chevron">▾</span></div>
+      </div>
+      <div class="case-body"><div class="case-inner">
+        <div class="case-section"><h4>The Problem</h4><p>Last-click attribution was inflating branded search value and undervaluing upper-funnel channels, leading to misallocated budgets across 60+ clients.</p></div>
+        <div class="case-section"><h4>Approach</h4><p>Designed multi-touch attribution models and lift studies isolating incremental demand from baseline traffic. Created a reusable framework across the client portfolio.</p></div>
+        <div class="case-section"><h4>Outcome</h4><p>Enabled budget reallocation toward higher-yield growth levers. Influenced shifts across 30+ client accounts. Supported $3.2M in incremental contract renewals.</p></div>
+        <div class="case-metrics"><span class="case-metric"><span>$9M</span> spend modeled</span><span class="case-metric"><span>$3.2M</span> contract value</span><span class="case-metric"><span>60+</span> clients</span></div>
+      </div></div>
+    </div>
+
+    <div class="case-card reveal d4" onclick="toggleCase(this)">
+      <div class="case-card-header">
+        <div><div class="case-title">AI Recommendation Impact Measurement</div><div class="case-meta">Mety Technology · 1.1M+ profiles analyzed</div></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="case-tag health">Healthtech</span><span class="case-chevron">▾</span></div>
+      </div>
+      <div class="case-body"><div class="case-inner">
+        <div class="case-section"><h4>The Problem</h4><p>The team needed to know if AI-generated lifestyle recommendations were driving sustained behavior change — or engagement that faded after first interaction.</p></div>
+        <div class="case-section"><h4>Approach</h4><p>Analyzed 1.1M+ health profiles to identify behavior segments. Linked engagement signals across 25K+ completed plans to sustained behavior change proxies. Built onboarding-to-engagement funnel models.</p></div>
+        <div class="case-section"><h4>Outcome</h4><p>Identified which recommendation types correlated with long-term retention vs. short-term spikes. Prioritized algorithm refinement and UX changes for highest-potential user segments.</p></div>
+        <div class="case-metrics"><span class="case-metric"><span>1.1M+</span> profiles</span><span class="case-metric"><span>25K+</span> plans</span><span class="case-metric"><span>Algo</span> refinement shipped</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="container">
+    <div class="sec-label reveal">Skills & Tools</div>
+    <h2 class="sec-title reveal" data-scramble>What I <span class="serif">work with</span></h2>
+    <div class="skills-grouped reveal d1">
+      <div class="skill-group">
+        <h3>Analytics & Experimentation</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">A/B Testing</span><span class="skill-chip">Multivariate Testing</span><span class="skill-chip">Statistical Sizing</span><span class="skill-chip">Experiment Readouts</span><span class="skill-chip">Funnel Diagnostics</span><span class="skill-chip">Cohort Analysis</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Lifecycle & Growth</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">AARRR Framework</span><span class="skill-chip">Lifecycle Segmentation</span><span class="skill-chip">LTV Modeling</span><span class="skill-chip">Churn Analysis</span><span class="skill-chip">CRM & Personalization</span><span class="skill-chip">Retention Strategy</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Platforms & Tools</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">GA4</span><span class="skill-chip">Mixpanel</span><span class="skill-chip">Looker Studio</span><span class="skill-chip">SQL</span><span class="skill-chip">Python</span><span class="skill-chip">Excel / Sheets</span><span class="skill-chip">Tableau</span><span class="skill-chip">HubSpot</span><span class="skill-chip">Marketo</span><span class="skill-chip">Salesforce</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Marketing & Attribution</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Multi-Touch Attribution</span><span class="skill-chip">Incrementality Testing</span><span class="skill-chip">Media Mix Modeling</span><span class="skill-chip">GTM Analytics</span><span class="skill-chip">Revenue Modeling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ DOMAINS ═══ -->
+<section>
+  <div class="container">
+    <div class="sec-label reveal">Domains</div>
+    <h2 class="sec-title reveal" data-scramble>Industries I've <span class="serif">operated in</span></h2>
+    <div class="domain-strip reveal d1">
+      <div class="domain-pill"><span class="domain-dot" style="background:var(--accent2)"></span>Fintech & Payments</div>
+      <div class="domain-pill"><span class="domain-dot" style="background:var(--accent)"></span>Healthcare & Healthtech</div>
+      <div class="domain-pill"><span class="domain-dot" style="background:var(--accent3)"></span>Management Consulting</div>
+      <div class="domain-pill"><span class="domain-dot" style="background:#f59e0b"></span>Consumer Software</div>
+      <div class="domain-pill"><span class="domain-dot" style="background:#ef4444"></span>AI-Driven Products</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ SIDE PROJECT ═══ -->
+<section>
+  <div class="container">
+    <div class="sec-label reveal">Side Project</div>
+    <h2 class="sec-title reveal" data-scramble>AI-Powered <span class="serif">YouTube Channel</span></h2>
+    <p class="sec-sub reveal">An end-to-end automated content pipeline — every decision data-driven.</p>
+    <div class="project-card reveal d1">
+      <div class="project-header">
+        <div>
+          <div style="font-size:.92rem;font-weight:600;margin-bottom:4px">Faceless YouTube · Automated Pipeline</div>
+          <div style="font-size:.76rem;color:var(--muted);font-family:'JetBrains Mono',monospace">GPT-4 · OpenAI TTS · FFmpeg · Python · Canva</div>
+        </div>
+        <span class="case-tag" style="background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.2)">Monetized ✓</span>
+      </div>
+      <div class="project-body">
+        <p style="font-size:.82rem;color:#bbb;line-height:1.75">Topic selection, thumbnail A/B testing, audience retention analysis, RPM optimization — every lever treated like a growth experiment. The channel became a live test bed for content-market fit at scale.</p>
+        <div class="project-stats">
+          <div class="project-stat"><span class="val" style="color:#ef4444">3.1M</span><span class="lbl">Total Views</span></div>
+          <div class="project-stat"><span class="val" style="color:var(--accent)">$85.9K</span><span class="lbl">Est. Revenue</span></div>
+          <div class="project-stat"><span class="val" style="color:var(--accent2)">10K+</span><span class="lbl">Subscribers</span></div>
+          <div class="project-stat"><span class="val" style="color:var(--accent3)">251%</span><span class="lbl">YoY Growth</span></div>
+          <div class="project-stat"><span class="val" style="color:#f59e0b">$27.95</span><span class="lbl">RPM</span></div>
+          <div class="project-stat"><span class="val" style="color:var(--muted)">146</span><span class="lbl">Videos Published</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section>
+  <div class="container">
+    <div class="sec-label reveal">Testimonials</div>
+    <h2 class="sec-title reveal" data-scramble>What people <span class="serif">say</span></h2>
+    <div class="testimonial-card reveal d1">
+      <p class="testimonial-text">"Sanal was the person we brought in when the numbers didn't make sense. He has a rare ability to cut through noise, find the real story in the data, and present it in a way that changes the conversation in the room."</p>
+      <div class="testimonial-footer"><div class="testimonial-avatar">AD</div><div><div class="testimonial-author">Analytics Director</div><div class="testimonial-role">Avanzar Health</div></div></div>
+    </div>
+    <div class="testimonial-card reveal d2">
+      <p class="testimonial-text">"His experiment sizing work became the template our entire team used. He didn't just analyze — he built frameworks that outlasted his time here."</p>
+      <div class="testimonial-footer"><div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--accent2),var(--accent3))">PL</div><div><div class="testimonial-author">Product Lead</div><div class="testimonial-role">Stripe</div></div></div>
+    </div>
+    <div class="testimonial-card reveal d3">
+      <p class="testimonial-text">"What sets Sanal apart is that he thinks like a product person but operates like a data person. He doesn't just hand you a dashboard — he tells you what to do with it."</p>
+      <div class="testimonial-footer"><div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--accent3),#ec4899)">VP</div><div><div class="testimonial-author">VP of Product</div><div class="testimonial-role">Mety Technology</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ EDUCATION ═══ -->
+<section>
+  <div class="container">
+    <div class="sec-label reveal">Education</div>
+    <h2 class="sec-title reveal" data-scramble>Academic <span class="serif">background</span></h2>
+    <div class="reveal d1">
+      <div class="edu-item"><div class="edu-school">Northeastern University</div><div class="edu-degree">M.S., Information Systems</div><div class="edu-date">2023 – 2025 · Boston, MA</div></div>
+      <div class="edu-item"><div class="edu-school">University of Mumbai</div><div class="edu-degree">M.B.A., Marketing & Operations</div><div class="edu-date">2018 – 2020 · Mumbai, India</div></div>
+      <div class="edu-item"><div class="edu-school">University of Mumbai</div><div class="edu-degree">B.E., Computer Science</div><div class="edu-date">2014 – 2018 · Mumbai, India</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CERTS ═══ -->
+<section style="padding-top:0">
+  <div class="container">
+    <div class="sec-label reveal">Certifications</div>
+    <div class="cert-wrap reveal d1">
+      <span class="cert-badge">CSPO</span>
+      <span class="cert-badge">Google Analytics 4</span>
+      <span class="cert-badge">HubSpot Marketing</span>
+      <span class="cert-badge">Salesforce Marketing Cloud</span>
+      <span class="cert-badge">Marketo Expert</span>
+      <span class="cert-badge">Meta Digital Marketing</span>
+      <span class="cert-badge">SEMrush SEO</span>
+      <span class="cert-badge">Mixpanel Analytics</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ INTERESTS ═══ -->
+<section>
+  <div class="container">
+    <div class="sec-label reveal">Exploring</div>
+    <h2 class="sec-title reveal" data-scramble>What I'm <span class="serif">thinking about</span></h2>
+    <div class="reveal d1">
+      <div class="interest-item"><div class="interest-icon" style="background:rgba(16,185,129,.1)">🔬</div>Causal inference in marketing and product analytics</div>
+      <div class="interest-item"><div class="interest-icon" style="background:rgba(6,182,212,.1)">🧪</div>Experimentation culture in large financial institutions</div>
+      <div class="interest-item"><div class="interest-icon" style="background:rgba(139,92,246,.1)">🤖</div>LLM-assisted analytics workflows</div>
+      <div class="interest-item"><div class="interest-icon" style="background:rgba(245,158,11,.1)">🔍</div>Generative Engine Optimization (GEO) and how AI search reshapes growth strategy</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="sec-label reveal">Let's Connect</div>
+    <h2 class="sec-title reveal" data-scramble style="text-align:center">Start a <span class="serif">conversation</span></h2>
+    <p class="sec-sub reveal" style="text-align:center;margin:0 auto 8px;max-width:400px">Open to senior analyst, growth analytics, and product analytics roles.</p>
+    <div class="contact-links reveal d1">
+      <a href="mailto:sanal.pillai97@gmail.com" class="contact-link"><span class="label">Email</span><span class="value">sanal.pillai97@gmail.com</span></a>
+      <a href="tel:+12027431120" class="contact-link"><span class="label">Phone</span><span class="value">(202) 743-1120</span></a>
+      <a href="https://www.linkedin.com/in/sanalpillai97/" target="_blank" class="contact-link"><span class="label">LinkedIn</span><span class="value">sanalpillai97</span></a>
+      <a href="#" class="contact-link"><span class="label">Resume</span><span class="value">Download PDF ↓</span></a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container"><span>© 2026 Sanal Pillai · Built with intent</span></div></footer>
+
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+/* ── Scroll progress ── */
+const prog = document.getElementById('scroll-progress');
+function updateProgress() {
+  const h = document.documentElement;
+  prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+/* ── Nav state + active link ── */
+const nav = document.getElementById('nav');
+const scrollTopBtn = document.getElementById('scroll-top');
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 50);
+  scrollTopBtn.classList.toggle('show', scrollY > 500);
+  // Active nav link
+  let current = '';
+  sections.forEach(s => { if (scrollY >= s.offsetTop - 200) current = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+}, { passive: true });
+
+/* ── Mouse spotlight ── */
+const spotlight = document.getElementById('spotlight');
+let mouseX = -999, mouseY = -999;
+document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+document.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
+document.addEventListener('mouseenter', () => { spotlight.style.opacity = '1'; });
+function animateSpotlight() {
+  spotlight.style.left = mouseX + 'px';
+  spotlight.style.top = mouseY + 'px';
+  requestAnimationFrame(animateSpotlight);
+}
+animateSpotlight();
+
+/* ── Reveal on scroll (blur-fade + standard) ── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .blur-in').forEach(el => revealObs.observe(el));
+
+/* ── Typewriter ── */
+const phrases = [
+  'Growth & Product Analytics Leader.',
+  'Senior Business Analyst.',
+  'Funnel Diagnostics Specialist.',
+  'Experimentation Strategist.',
+  'Data-Driven Decision Maker.'
+];
+let pi = 0, ci = 0, deleting = false;
+const typeEl = document.getElementById('typewriter');
+function typewrite() {
+  const phrase = phrases[pi];
+  if (!deleting) {
+    typeEl.textContent = phrase.substring(0, ci + 1);
+    ci++;
+    if (ci === phrase.length) { deleting = true; setTimeout(typewrite, 2200); return; }
+    setTimeout(typewrite, 55 + Math.random() * 30);
+  } else {
+    typeEl.textContent = phrase.substring(0, ci - 1);
+    ci--;
+    if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(typewrite, 350); return; }
+    setTimeout(typewrite, 25);
+  }
+}
+setTimeout(typewrite, 800);
+
+/* ── Text scramble on hover ── */
+const scrambleChars = '!@#$%^&*()_+{}|:<>?/\\=01';
+document.querySelectorAll('[data-scramble]').forEach(el => {
+  const original = el.innerHTML;
+  el.addEventListener('mouseenter', () => {
+    let iterations = 0;
+    const textNodes = [];
+    // Get only text content, preserve HTML
+    const text = el.textContent;
+    const interval = setInterval(() => {
+      el.childNodes.forEach(node => {
+        if (node.nodeType === 3) { // text node
+          node.textContent = node.textContent.split('').map((c, i) => {
+            if (c === ' ') return ' ';
+            if (i < iterations) return el.textContent[i] || c;
+            return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+          }).join('');
+        }
+      });
+      iterations += 1.5;
+      if (iterations >= text.length) { clearInterval(interval); el.innerHTML = original; }
+    }, 30);
+  });
+});
+
+/* ── Case study toggle ── */
+function toggleCase(card) {
+  const wasOpen = card.classList.contains('open');
+  document.querySelectorAll('.case-card.open').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) card.classList.add('open');
+}
+
+/* ── Particle canvas ── */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let w, h, particles = [];
+
+function resize() { w = canvas.width = innerWidth; h = canvas.height = innerHeight; }
+resize();
+addEventListener('resize', resize);
+
+const PC = Math.min(50, Math.floor(innerWidth / 25));
+for (let i = 0; i < PC; i++) {
+  particles.push({
+    x: Math.random() * (w || 1), y: Math.random() * (h || 1),
+    vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25,
+    r: Math.random() * 1.2 + .4
+  });
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, w, h);
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+    if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+    const dx = p.x - mouseX, dy = p.y - mouseY, dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 130) { const f = (130 - dist) / 130 * .6; p.x += (dx / dist) * f; p.y += (dy / dist) * f; }
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(16,185,129,.3)';
+    ctx.fill();
+    for (let j = i + 1; j < particles.length; j++) {
+      const p2 = particles[j], d = Math.hypot(p.x - p2.x, p.y - p2.y);
+      if (d < 130) {
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(16,185,129,${.06 * (1 - d / 130)})`;
+        ctx.lineWidth = .5; ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+/* ── Magnetic buttons ── */
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width / 2;
+    const y = e.clientY - r.top - r.height / 2;
+    btn.style.transform = `translate(${x * .15}px, ${y * .15}px)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+
+/* ── Smooth parallax for hero blobs ── */
+let scrollY_cached = 0;
+window.addEventListener('scroll', () => { scrollY_cached = scrollY; }, { passive: true });
+function parallax() {
+  const blobs = document.querySelectorAll('.hero-blob');
+  blobs.forEach((b, i) => { b.style.transform = `translateY(${scrollY_cached * (.1 + i * .05)}px)`; });
+  requestAnimationFrame(parallax);
+}
+parallax();
+</script>
+</body>
+</html>
