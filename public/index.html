@@ -142,6 +142,50 @@ section{padding:48px 0}
 .case-metrics{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
 .case-metric{padding:6px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:7px;font-size:.68rem;font-family:'JetBrains Mono',monospace}.case-metric span{color:var(--accent);font-weight:600}
 
+/* ═══ PROJECTS ═══ */
+.project-grid{display:grid;gap:16px}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .4s}
+.proj-card:hover{border-color:var(--border-h);box-shadow:0 8px 36px rgba(0,0,0,.07);transform:translateY(-2px)}
+.proj-img-wrap{position:relative;height:200px;overflow:hidden;background:var(--bg2);cursor:pointer}
+.proj-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.proj-card:hover .proj-img-wrap img{transform:scale(1.03)}
+.proj-img-nav{position:absolute;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.7rem;transition:all .25s;backdrop-filter:blur(4px);z-index:2}
+.proj-img-nav:hover{background:rgba(0,0,0,.7)}
+.proj-img-nav.prev{left:8px}.proj-img-nav.next{right:8px}
+.proj-img-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:2}
+.proj-img-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);transition:all .25s}.proj-img-dot.active{background:#fff;transform:scale(1.2)}
+.proj-badges{position:absolute;top:8px;left:8px;display:flex;gap:5px;z-index:2}
+.proj-badge{padding:3px 8px;border-radius:5px;font-size:.55rem;font-family:'JetBrains Mono',monospace;font-weight:500;backdrop-filter:blur(8px)}
+.proj-badge.cat{background:rgba(5,150,105,.85);color:#fff}
+.proj-badge.live{background:rgba(255,255,255,.9);color:var(--text)}
+.proj-body{padding:18px 20px}
+.proj-title{font-size:.92rem;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.proj-short{font-size:.76rem;color:var(--muted);line-height:1.65;margin-bottom:12px}
+.proj-tech{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
+.proj-tech span{padding:3px 8px;background:var(--bg2);border:1px solid var(--border);border-radius:5px;font-size:.6rem;font-family:'JetBrains Mono',monospace;color:var(--dim);transition:all .25s}
+.proj-tech span:hover{color:var(--accent);border-color:rgba(5,150,105,.2)}
+.proj-toggle{display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(--accent);cursor:pointer;border:none;background:none;font-family:'Outfit',sans-serif;padding:0;transition:all .25s}
+.proj-toggle:hover{gap:6px}
+.proj-toggle .chevron{transition:transform .3s;font-size:.6rem}
+.proj-card.expanded .proj-toggle .chevron{transform:rotate(180deg)}
+.proj-detail{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.22,1,.36,1)}
+.proj-card.expanded .proj-detail{max-height:500px}
+.proj-detail-inner{padding-top:14px;border-top:1px solid var(--border);margin-top:14px}
+.proj-detail-inner p{font-size:.76rem;color:var(--muted);line-height:1.75;margin-bottom:12px}
+.proj-features{list-style:none;padding:0;margin-bottom:14px}
+.proj-features li{font-size:.72rem;color:var(--muted);padding:4px 0 4px 16px;position:relative;line-height:1.5}
+.proj-features li::before{content:'→';position:absolute;left:0;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.65rem}
+.proj-links{display:flex;gap:8px}
+.proj-link{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:1px solid var(--border);border-radius:7px;font-size:.7rem;color:var(--muted);transition:all .3s;font-family:'Outfit',sans-serif;text-decoration:none;cursor:pointer;background:none}
+.proj-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.proj-link.primary{background:var(--text);color:var(--bg);border-color:var(--text)}.proj-link.primary:hover{opacity:.85}
+.proj-no-img{height:200px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg2),var(--card));font-size:2.5rem;opacity:.3}
+
+@media(max-width:640px){
+  .proj-img-wrap{height:160px}
+  .proj-body{padding:14px 16px}
+  .proj-no-img{height:140px}
+}
+
 /* ═══ SKILLS ═══ */
 .skills-grouped{display:grid;gap:20px}.skill-group h3{font-size:.72rem;font-family:'JetBrains Mono',monospace;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px}.skill-group h3::before{content:'//';color:var(--dim)}
 .skill-chips{display:flex;flex-wrap:wrap;gap:5px}.skill-chip{padding:5px 10px;background:var(--card);border:1px solid var(--border);border-radius:6px;font-size:.7rem;color:var(--muted);transition:all .3s;cursor:default;position:relative;overflow:hidden}
@@ -245,7 +289,7 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
 <div id="spotlight"></div>
 <canvas id="particles"></canvas>
 
-<nav id="nav"><div class="nav-inner"><div class="nav-name"><div class="nav-logo">SP</div>Sanal Pillai</div><div class="nav-links"><a href="#about">About</a><a href="#experience">Work</a><a href="#cases">Cases</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div><a href="#contact" class="nav-cta">Get in Touch</a></div></nav>
+<nav id="nav"><div class="nav-inner"><div class="nav-name"><div class="nav-logo">SP</div>Sanal Pillai</div><div class="nav-links"><a href="#about">About</a><a href="#experience">Work</a><a href="#cases">Cases</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div><a href="#contact" class="nav-cta">Get in Touch</a></div></nav>
 
 <section class="hero" id="top">
 <div class="hero-blob hero-blob-1"></div>
@@ -255,7 +299,7 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
   <h1 class="blur-in d1">I'm <strong><span class="name-hl">Sanal Pillai</span></strong>,<br/><span class="typewriter-line">a <span id="typewriter"></span><span class="cursor-blink"></span></span></h1>
   <p class="hero-desc blur-in d2"><strong>6+ years</strong> driving acquisition, activation, lifecycle optimization, experimentation, and monetization strategy across <strong>fintech, healthtech, consulting</strong>, and <strong>consumer products</strong>.</p>
   <p class="hero-meta blur-in d3">BCG · Stripe · Avanzar Health · Mety Technology</p>
-  <div class="hero-btns blur-in d3"><a href="#cases" class="btn btn-primary">View Case Studies <span class="arrow arrow-down">↓</span></a><a href="javascript:void(0)" onclick="openModal()" class="btn btn-ghost">Download Resume <span class="arrow">→</span></a></div>
+  <div class="hero-btns blur-in d3"><a href="#cases" class="btn btn-primary">View Case Studies <span class="arrow arrow-down">↓</span></a><a href="javascript:void(0)" onclick="openModal()" class="btn btn-ghost">Request Resume <span class="arrow">→</span></a></div>
   <div class="hero-tags blur-in d4"><span class="tag">Growth Analytics</span><span class="tag">Experimentation</span><span class="tag">Funnel Optimization</span><span class="tag">Lifecycle & Retention</span><span class="tag">Attribution Modeling</span><span class="tag">Revenue Analytics</span></div>
 </div>
 </section>
@@ -285,6 +329,112 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
 <div class="divider"></div>
 <section id="cases"><div class="container"><div class="sec-label reveal">Case Studies</div><h2 class="sec-title reveal">Selected <span class="serif">work</span></h2><p class="sec-sub reveal">Click to expand.</p><div class="case-card reveal d1" onclick="toggleCase(this)"><div class="case-card-header"><div><div class="case-title">Acquisition Funnel Diagnostics</div><div class="case-meta">Stripe · 380K+ sign-ups</div></div><div style="display:flex;align-items:center;gap:8px"><span class="case-tag fintech">Fintech</span><span class="case-chevron">▾</span></div></div><div class="case-body"><div class="case-inner"><div class="case-section"><h4>Problem</h4><p>380K+ new users entering through four channels with wildly varying activation rates and no clear drop-off picture.</p></div><div class="case-section"><h4>Approach</h4><p>Segmented by entry point, mapped cohorts through onboarding, identified messaging mismatches between acquisition promise and activation UX.</p></div><div class="case-section"><h4>Outcome</h4><p>Lifecycle email entrants showed 2.3x higher activation with personalized onboarding. Findings directly shaped experiments.</p></div><div class="case-metrics"><span class="case-metric"><span>380K+</span> sign-ups</span><span class="case-metric"><span>2.3x</span> activation lift</span><span class="case-metric"><span>4</span> channels</span></div></div></div></div><div class="case-card reveal d2" onclick="toggleCase(this)"><div class="case-card-header"><div><div class="case-title">Monetization Experiment Sizing</div><div class="case-meta">Stripe · $14M revenue evaluated</div></div><div style="display:flex;align-items:center;gap:8px"><span class="case-tag fintech">Fintech</span><span class="case-chevron">▾</span></div></div><div class="case-body"><div class="case-inner"><div class="case-section"><h4>Problem</h4><p>Leadership needed annualized revenue impact of pricing, gating, and trial-length experiments before committing engineering.</p></div><div class="case-section"><h4>Approach</h4><p>Built sizing framework modeling incremental impact on conversion and early retention cohorts across experiment types.</p></div><div class="case-section"><h4>Outcome</h4><p>Framework became org-wide standard. Two pricing changes shipped with measurable early-cohort retention uplift.</p></div><div class="case-metrics"><span class="case-metric"><span>$14M</span> sized</span><span class="case-metric"><span>2</span> shipped</span><span class="case-metric"><span>Template</span> adopted</span></div></div></div></div><div class="case-card reveal d3" onclick="toggleCase(this)"><div class="case-card-header"><div><div class="case-title">Attribution & Incrementality Modeling</div><div class="case-meta">Avanzar · $9M media spend</div></div><div style="display:flex;align-items:center;gap:8px"><span class="case-tag health">Healthcare</span><span class="case-chevron">▾</span></div></div><div class="case-body"><div class="case-inner"><div class="case-section"><h4>Problem</h4><p>Last-click attribution inflating branded search, undervaluing upper-funnel channels across 60+ client budgets.</p></div><div class="case-section"><h4>Approach</h4><p>Multi-touch attribution models and lift studies isolating incremental demand. Reusable framework for full portfolio.</p></div><div class="case-section"><h4>Outcome</h4><p>Budget reallocation across 30+ accounts. $3.2M in incremental contract renewals.</p></div><div class="case-metrics"><span class="case-metric"><span>$9M</span> modeled</span><span class="case-metric"><span>$3.2M</span> value</span><span class="case-metric"><span>60+</span> clients</span></div></div></div></div><div class="case-card reveal d4" onclick="toggleCase(this)"><div class="case-card-header"><div><div class="case-title">AI Recommendation Impact</div><div class="case-meta">Mety · 1.1M+ profiles</div></div><div style="display:flex;align-items:center;gap:8px"><span class="case-tag health">Healthtech</span><span class="case-chevron">▾</span></div></div><div class="case-body"><div class="case-inner"><div class="case-section"><h4>Problem</h4><p>Were AI lifestyle recommendations driving sustained behavior change or engagement that faded after first interaction?</p></div><div class="case-section"><h4>Approach</h4><p>Behavior segmentation across 1.1M+ profiles. Linked 25K+ plan engagement signals to sustained change proxies.</p></div><div class="case-section"><h4>Outcome</h4><p>Identified retention-correlated recommendation types. Prioritized algo refinement and UX changes.</p></div><div class="case-metrics"><span class="case-metric"><span>1.1M+</span> profiles</span><span class="case-metric"><span>25K+</span> plans</span><span class="case-metric"><span>Algo</span> refined</span></div></div></div></div></div></section>
 <div class="divider"></div>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects"><div class="container">
+<div class="sec-label reveal">Projects</div>
+<h2 class="sec-title reveal">Things I've <span class="serif">built</span></h2>
+<p class="sec-sub reveal">End-to-end applications, not just notebooks.</p>
+<div class="project-grid">
+
+<!-- Project 1: Diabetes Prediction -->
+<div class="proj-card reveal d1">
+  <div class="proj-img-wrap" data-proj="diabetes">
+    <div class="proj-badges"><span class="proj-badge cat">ML / Healthcare</span><span class="proj-badge live">Live App ↗</span></div>
+    <img src="https://github.com/sanalpillai/Diabetes-Prediction/blob/main/streamlit_application.JPG?raw=true" alt="Diabetes Prediction App" loading="lazy"/>
+    <div class="proj-img-dots"><span class="proj-img-dot active"></span></div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-title">Diabetes Prediction App</div>
+    <div class="proj-short">End-to-end healthcare ML app that predicts diabetes risk from user health inputs, visualizes feature importance, and generates personalized recommendations with downloadable PDF reports.</div>
+    <div class="proj-tech">
+      <span>Python</span><span>Streamlit</span><span>Scikit-learn</span><span>Random Forest</span><span>Pandas</span><span>PDF Generation</span>
+    </div>
+    <button class="proj-toggle" onclick="toggleProj(this)">See details <span class="chevron">▾</span></button>
+    <div class="proj-detail"><div class="proj-detail-inner">
+      <p>This project goes beyond a basic prediction by including visual health comparisons, feature importance charts, personalized recommendations, meal suggestions, educational resources, and downloadable PDF reports. It shows that I can build an end-to-end analytics application, not just train a model in a notebook.</p>
+      <ul class="proj-features">
+        <li>Diabetes risk prediction using Random Forest classifier</li>
+        <li>Interactive Streamlit UI with sidebar health parameter inputs</li>
+        <li>Radar chart visualization for comparing health metrics</li>
+        <li>Feature importance graph explaining model decisions</li>
+        <li>Personalized meal plans based on risk profile</li>
+        <li>Downloadable PDF health report generation</li>
+        <li>Live deployed and publicly accessible</li>
+      </ul>
+      <div class="proj-links">
+        <a href="https://diabetes-prediction-capstone-spillai.streamlit.app" target="_blank" class="proj-link primary">Live App ↗</a>
+        <a href="https://github.com/sanalpillai/Diabetes-Prediction" target="_blank" class="proj-link">GitHub ↗</a>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- Project 2: SmartDashPro -->
+<div class="proj-card reveal d2">
+  <div class="proj-img-wrap" data-proj="smartdash">
+    <div class="proj-badges"><span class="proj-badge cat">Analytics Dashboard</span></div>
+    <img src="https://github.com/user-attachments/assets/76940d45-e19b-442a-9b4c-82631ae05f33" alt="SmartDashPro Dashboard" loading="lazy"/>
+    <button class="proj-img-nav prev" onclick="slideProjImg(this,-1)">‹</button>
+    <button class="proj-img-nav next" onclick="slideProjImg(this,1)">›</button>
+    <div class="proj-img-dots">
+      <span class="proj-img-dot active"></span><span class="proj-img-dot"></span><span class="proj-img-dot"></span><span class="proj-img-dot"></span><span class="proj-img-dot"></span><span class="proj-img-dot"></span>
+    </div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-title">SmartDashPro</div>
+    <div class="proj-short">Professional analytics dashboard for monitoring business metrics, tracking KPIs, and turning raw data into visual, actionable insights with interactive filtering and drill-downs.</div>
+    <div class="proj-tech">
+      <span>Dashboard Design</span><span>Data Visualization</span><span>KPI Tracking</span><span>Interactive Filters</span><span>Business Intelligence</span>
+    </div>
+    <button class="proj-toggle" onclick="toggleProj(this)">See details <span class="chevron">▾</span></button>
+    <div class="proj-detail"><div class="proj-detail-inner">
+      <p>SmartDashPro is a portfolio-grade analytics dashboard built to demonstrate how I translate raw data into decision-ready visuals. It features multiple views, filterable KPIs, trend analysis, and clean layout principles that mirror what I build professionally.</p>
+      <ul class="proj-features">
+        <li>Multi-view dashboard with business performance metrics</li>
+        <li>Interactive filtering and drill-down capabilities</li>
+        <li>Trend analysis and time-series visualizations</li>
+        <li>Clean, professional layout optimized for readability</li>
+        <li>Designed to demonstrate real-world BI deliverables</li>
+      </ul>
+      <div class="proj-links">
+        <a href="https://github.com/sanalpillai/SmartDashPro" target="_blank" class="proj-link">GitHub ↗</a>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- Project 3: E-commerce Opinion Mining -->
+<div class="proj-card reveal d3">
+  <div class="proj-no-img">🔍</div>
+  <div class="proj-body">
+    <div class="proj-title">E-commerce Review Mining System</div>
+    <div class="proj-short">NLP-based opinion mining system that analyzes e-commerce reviews to extract product features, classify sentiment using SentiWordNet, and generate comparative product insights.</div>
+    <div class="proj-tech">
+      <span>NLP</span><span>Sentiment Analysis</span><span>SentiWordNet</span><span>POS Tagging</span><span>ASP.NET</span><span>C#</span><span>SQL Server</span><span>Web Scraping</span>
+    </div>
+    <button class="proj-toggle" onclick="toggleProj(this)">See details <span class="chevron">▾</span></button>
+    <div class="proj-detail"><div class="proj-detail-inner">
+      <p>This project applies opinion mining and NLP to e-commerce reviews. It extracts product-level insights from customer feedback by preprocessing review text, identifying product features, summarizing opinions, and classifying sentiment — connecting technical NLP work with a real business problem.</p>
+      <ul class="proj-features">
+        <li>Web scraping for collecting real-time user reviews</li>
+        <li>Parts-of-speech tagging and text preprocessing</li>
+        <li>Product feature extraction from unstructured review text</li>
+        <li>Feature-based opinion summarization</li>
+        <li>Sentiment classification using SentiWordNet</li>
+        <li>Comparative product insight generation</li>
+        <li>Full documentation: report, PPT, and research paper</li>
+      </ul>
+      <div class="proj-links">
+        <a href="https://github.com/sanalpillai/E-commerce-Product-Review-Management-System-Based-On-Opinion-Mining" target="_blank" class="proj-link">GitHub ↗</a>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+</div>
+</div></section>
+<div class="divider"></div>
 <section id="skills"><div class="container"><div class="sec-label reveal">Skills & Tools</div><h2 class="sec-title reveal">What I <span class="serif">work with</span></h2><div class="skills-grouped reveal d1"><div class="skill-group"><h3>Analytics & Experimentation</h3><div class="skill-chips"><span class="skill-chip">A/B Testing</span><span class="skill-chip">Multivariate Testing</span><span class="skill-chip">Statistical Sizing</span><span class="skill-chip">Experiment Readouts</span><span class="skill-chip">Funnel Diagnostics</span><span class="skill-chip">Cohort Analysis</span></div></div><div class="skill-group"><h3>Lifecycle & Growth</h3><div class="skill-chips"><span class="skill-chip">AARRR Framework</span><span class="skill-chip">Lifecycle Segmentation</span><span class="skill-chip">LTV Modeling</span><span class="skill-chip">Churn Analysis</span><span class="skill-chip">CRM & Personalization</span><span class="skill-chip">Retention Strategy</span></div></div><div class="skill-group"><h3>Platforms & Tools</h3><div class="skill-chips"><span class="skill-chip">GA4</span><span class="skill-chip">Mixpanel</span><span class="skill-chip">Looker Studio</span><span class="skill-chip">SQL</span><span class="skill-chip">Python</span><span class="skill-chip">Excel / Sheets</span><span class="skill-chip">Tableau</span><span class="skill-chip">HubSpot</span><span class="skill-chip">Marketo</span><span class="skill-chip">Salesforce</span></div></div><div class="skill-group"><h3>Marketing & Attribution</h3><div class="skill-chips"><span class="skill-chip">Multi-Touch Attribution</span><span class="skill-chip">Incrementality Testing</span><span class="skill-chip">Media Mix Modeling</span><span class="skill-chip">GTM Analytics</span><span class="skill-chip">Revenue Modeling</span></div></div></div></div></section>
 <div class="divider"></div>
 <section><div class="container"><div class="sec-label reveal">Domains</div><h2 class="sec-title reveal">Industries I've <span class="serif">operated in</span></h2><div class="domain-strip reveal d1"><div class="domain-pill"><span class="domain-dot" style="background:var(--accent2)"></span>Fintech & Payments</div><div class="domain-pill"><span class="domain-dot" style="background:var(--accent)"></span>Healthcare & Healthtech</div><div class="domain-pill"><span class="domain-dot" style="background:var(--accent3)"></span>Management Consulting</div><div class="domain-pill"><span class="domain-dot" style="background:#d97706"></span>Consumer Software</div><div class="domain-pill"><span class="domain-dot" style="background:#dc2626"></span>AI-Driven Products</div></div></div></section>
@@ -295,35 +445,35 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
 <section style="padding-top:0"><div class="container"><div class="sec-label reveal">Certifications</div><div class="cert-wrap reveal d1"><span class="cert-badge">CSPO</span><span class="cert-badge">Google Analytics 4</span><span class="cert-badge">HubSpot Marketing</span><span class="cert-badge">Salesforce Marketing Cloud</span><span class="cert-badge">Marketo Expert</span><span class="cert-badge">Meta Digital Marketing</span><span class="cert-badge">SEMrush SEO</span><span class="cert-badge">Mixpanel Analytics</span></div></div></section>
 <div class="divider"></div>
 <section><div class="container"><div class="sec-label reveal">Exploring</div><h2 class="sec-title reveal">What I'm <span class="serif">thinking about</span></h2><div class="reveal d1"><div class="interest-item"><div class="interest-icon" style="background:rgba(5,150,105,.07)">🔬</div>Causal inference in marketing and product analytics</div><div class="interest-item"><div class="interest-icon" style="background:rgba(8,145,178,.07)">🧪</div>Experimentation culture in large financial institutions</div><div class="interest-item"><div class="interest-icon" style="background:rgba(124,58,237,.07)">🤖</div>LLM-assisted analytics workflows</div><div class="interest-item"><div class="interest-icon" style="background:rgba(217,119,6,.07)">🔍</div>Generative Engine Optimization and AI search's impact on growth</div></div></div></section>
-<section class="contact-section" id="contact"><div class="container"><div class="sec-label reveal">Let's Connect</div><h2 class="sec-title reveal" style="text-align:center">Start a <span class="serif">conversation</span></h2><p class="sec-sub reveal" style="text-align:center;margin:0 auto 6px;max-width:380px">Open to senior analyst, growth analytics, and product analytics roles.</p><div class="contact-links reveal d1"><a href="mailto:sanal.pillai97@gmail.com" class="contact-link"><span class="label">Email</span><span class="value">sanal.pillai97@gmail.com</span></a><a href="tel:+12027431120" class="contact-link"><span class="label">Phone</span><span class="value">(202) 743-1120</span></a><a href="https://www.linkedin.com/in/sanalpillai97/" target="_blank" class="contact-link"><span class="label">LinkedIn</span><span class="value">sanalpillai97</span></a><a href="javascript:void(0)" onclick="openModal()" class="contact-link"><span class="label">Resume</span><span class="value">Download PDF ↓</span></a></div></div></section>
+<section class="contact-section" id="contact"><div class="container"><div class="sec-label reveal">Let's Connect</div><h2 class="sec-title reveal" style="text-align:center">Start a <span class="serif">conversation</span></h2><p class="sec-sub reveal" style="text-align:center;margin:0 auto 6px;max-width:380px">Open to senior analyst, growth analytics, and product analytics roles.</p><div class="contact-links reveal d1"><a href="mailto:sanal.pillai97@gmail.com" class="contact-link"><span class="label">Email</span><span class="value">sanal.pillai97@gmail.com</span></a><a href="tel:+12027431120" class="contact-link"><span class="label">Phone</span><span class="value">(202) 743-1120</span></a><a href="https://www.linkedin.com/in/sanalpillai97/" target="_blank" class="contact-link"><span class="label">LinkedIn</span><span class="value">sanalpillai97</span></a><a href="javascript:void(0)" onclick="openModal()" class="contact-link"><span class="label">Resume</span><span class="value">Request PDF</span></a></div></div></section>
 <!-- Resume Modal -->
 <div class="modal-overlay" id="resumeModal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
     <div id="formView">
-      <h3>Download Resume</h3>
-      <p>Leave your details and I'll know you grabbed a copy. The PDF downloads immediately after submitting.</p>
+      <h3>Request Resume</h3>
+      <p>Drop your details below and I'll send my resume directly to your inbox.</p>
       <form id="resumeForm" onsubmit="return handleSubmit(event)">
         <div class="form-group">
-          <label>Name</label>
-          <input type="text" name="name" placeholder="Your name" required/>
+          <label>Name *</label>
+          <input type="text" name="name" placeholder="Your full name" required/>
         </div>
         <div class="form-group">
-          <label>Email</label>
+          <label>Email *</label>
           <input type="email" name="email" placeholder="you@company.com" required/>
         </div>
         <div class="form-group">
-          <label>Message <span style="color:var(--dim);text-transform:none;letter-spacing:0;font-family:Outfit">(optional)</span></label>
-          <textarea name="message" rows="3" placeholder="What caught your eye?"></textarea>
+          <label>Message *</label>
+          <textarea name="message" rows="3" placeholder="What role or opportunity is this for?" required></textarea>
         </div>
-        <button type="submit" class="form-submit" id="submitBtn">Download Resume →</button>
+        <button type="submit" class="form-submit" id="submitBtn">Request Resume →</button>
       </form>
     </div>
     <div id="successView" style="display:none">
       <div class="form-success">
         <div class="check">✓</div>
-        <h4>Resume downloading!</h4>
-        <p>Thanks for your interest. I'll get back to you soon.</p>
+        <h4>Request received!</h4>
+        <p>Thanks for reaching out. I'll share my resume with you shortly via email.</p>
       </div>
     </div>
   </div>
@@ -375,6 +525,34 @@ setTimeout(tw,600);
 /* Case toggle */
 function toggleCase(c){var o=c.classList.contains('open');document.querySelectorAll('.case-card.open').forEach(function(x){x.classList.remove('open')});if(!o)c.classList.add('open')}
 
+/* Project toggle */
+function toggleProj(btn){var card=btn.closest('.proj-card');card.classList.toggle('expanded')}
+
+/* Project image carousel */
+var projImages={
+  smartdash:[
+    'https://github.com/user-attachments/assets/76940d45-e19b-442a-9b4c-82631ae05f33',
+    'https://github.com/user-attachments/assets/39f00823-bbe0-435c-8929-2812708ed8fe',
+    'https://github.com/user-attachments/assets/f8fd71c5-a8de-4529-9aa1-b5af9d4dae11',
+    'https://github.com/user-attachments/assets/e0e48dcd-f1cf-482b-8c47-c4ccc2c3b83f',
+    'https://github.com/user-attachments/assets/61e4caf1-5664-43ed-91d3-45d3bb4ba031',
+    'https://github.com/user-attachments/assets/b5db59c8-2d53-4fd2-9fbb-4da867ad6473'
+  ]
+};
+var projIdx={smartdash:0};
+function slideProjImg(btn,dir){
+  var wrap=btn.closest('.proj-img-wrap');
+  var key=wrap.dataset.proj;
+  var imgs=projImages[key];
+  if(!imgs)return;
+  var idx=projIdx[key]||0;
+  idx=(idx+dir+imgs.length)%imgs.length;
+  projIdx[key]=idx;
+  wrap.querySelector('img').src=imgs[idx];
+  var dots=wrap.querySelectorAll('.proj-img-dot');
+  dots.forEach(function(d,i){d.classList.toggle('active',i===idx)});
+}
+
 /* Magnetic buttons */
 document.querySelectorAll('.btn').forEach(function(b){
   b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.1+'px,'+(e.clientY-r.top-r.height/2)*.1+'px)'});
@@ -383,62 +561,62 @@ document.querySelectorAll('.btn').forEach(function(b){
 
 /* Resume Modal */
 function openModal(){document.getElementById('resumeModal').classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('resumeModal').classList.remove('active');document.body.style.overflow=''}
+function closeModal(){document.getElementById('resumeModal').classList.remove('active');document.body.style.overflow='';
+  /* Reset to form view after closing */
+  setTimeout(function(){
+    document.getElementById('formView').style.display='block';
+    document.getElementById('successView').style.display='none';
+    document.getElementById('submitBtn').disabled=false;
+    document.getElementById('submitBtn').textContent='Request Resume →';
+  },300);
+}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
 
 function handleSubmit(e){
   e.preventDefault();
   var form=document.getElementById('resumeForm');
   var btn=document.getElementById('submitBtn');
-  var name=form.name.value;
-  var email=form.email.value;
-  var message=form.message.value||'No message';
   btn.disabled=true;
   btn.textContent='Sending...';
 
-  /* ── OPTION A: Formspree (recommended) ──
-     1. Go to https://formspree.io and sign up free
-     2. Create a form → it gives you an ID like "xpzvqkdl"
-     3. Replace YOUR_FORM_ID below with that ID
-     Uncomment this block and delete Option B when ready:
+  /*
+   * Uses formsubmit.co — free, no signup needed.
+   *
+   * HOW IT WORKS:
+   * 1. First time someone submits, formsubmit.co sends a
+   *    verification email to sanal.pillai97@gmail.com
+   * 2. Click the verify link in that email (one-time only)
+   * 3. After that, every form submission lands in your inbox
+   *
+   * The email you receive will contain:
+   *   - Name, Email, Message from the person
+   *   - Subject line: "Resume Request from [name]"
+   */
+  var data=new FormData(form);
+  data.append('_subject','Resume Request from '+form.name.value);
+  data.append('_captcha','false');
+  data.append('_template','table');
 
-  fetch('https://formspree.io/f/YOUR_FORM_ID',{
+  fetch('https://formsubmit.co/ajax/sanal.pillai97@gmail.com',{
     method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({name:name,email:email,message:message,_subject:'Resume Download: '+name})
+    body:data
   }).then(function(r){
-    if(r.ok){showSuccess()}
-    else{alert('Something went wrong. Please try again.');btn.disabled=false;btn.textContent='Download Resume →'}
-  }).catch(function(){alert('Network error. Please try again.');btn.disabled=false;btn.textContent='Download Resume →'});
-  */
-
-  /* ── OPTION B: mailto fallback (works without any setup) ── */
-  var subject=encodeURIComponent('Resume Download: '+name);
-  var body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nMessage: '+message+'\n\nSent from your portfolio site.');
-  window.open('mailto:sanal.pillai97@gmail.com?subject='+subject+'&body='+body,'_blank');
-  showSuccess();
+    if(r.ok){
+      document.getElementById('formView').style.display='none';
+      document.getElementById('successView').style.display='block';
+      form.reset();
+    }else{
+      alert('Something went wrong. Please email me directly at sanal.pillai97@gmail.com');
+      btn.disabled=false;
+      btn.textContent='Request Resume →';
+    }
+  }).catch(function(){
+    alert('Network error. Please email me directly at sanal.pillai97@gmail.com');
+    btn.disabled=false;
+    btn.textContent='Request Resume →';
+  });
 
   return false;
-}
-
-function showSuccess(){
-  document.getElementById('formView').style.display='none';
-  document.getElementById('successView').style.display='block';
-  /* Trigger actual PDF download */
-  var a=document.createElement('a');
-  a.href='/resume/Sanal_Pillai_Resume.pdf';
-  a.download='Sanal_Pillai_Resume.pdf';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  /* Reset after 3 seconds */
-  setTimeout(function(){
-    document.getElementById('formView').style.display='block';
-    document.getElementById('successView').style.display='none';
-    document.getElementById('resumeForm').reset();
-    document.getElementById('submitBtn').disabled=false;
-    document.getElementById('submitBtn').textContent='Download Resume →';
-  },3000);
 }
 
 /* Particles */
