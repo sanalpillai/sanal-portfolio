@@ -1,17 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Sanal Pillai — Growth & Product Analytics</title>
 <meta name="description" content="Growth & product analytics leader with 6+ years driving acquisition, activation, lifecycle optimization, experimentation, & monetization strategy."/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Sanal Pillai — Growth & Product Analytics"/>
+<meta property="og:description" content="6+ years at BCG, Stripe & Avanzar Health driving acquisition, experimentation, lifecycle optimization & monetization strategy."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://sanalpillai.vercel.app"/>
+<meta property="og:image" content="https://sanalpillai.vercel.app/og-preview.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Sanal Pillai — Growth & Product Analytics"/>
+<meta name="twitter:description" content="Growth & product analytics leader. BCG · Stripe · Avanzar Health."/>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Sanal Pillai","jobTitle":"Growth & Product Analytics Leader","description":"Growth and product analytics leader with 6+ years in fintech, healthtech, consulting, and consumer products.","url":"https://sanalpillai.vercel.app","email":"sanal.pillai97@gmail.com","sameAs":["https://www.linkedin.com/in/sanalpillai97/"]}
+</script>
+
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#fafaf9;--bg2:#f5f5f4;--card:#fff;--border:rgba(0,0,0,.07);--border-h:rgba(0,0,0,.14);--text:#1c1917;--muted:#78716c;--dim:#a8a29e;--accent:#059669;--accent2:#0891b2;--accent3:#7c3aed;--accent-glow:rgba(5,150,105,.08);--radius:12px;--col:720px}
+
+/* ═══ THEME VARIABLES ═══ */
+:root{
+  --bg:#fafaf9;--bg2:#f5f5f4;--card:#fff;
+  --border:rgba(0,0,0,.07);--border-h:rgba(0,0,0,.14);
+  --text:#1c1917;--muted:#78716c;--dim:#a8a29e;
+  --accent:#059669;--accent2:#0891b2;--accent3:#7c3aed;
+  --accent-glow:rgba(5,150,105,.08);
+  --radius:12px;--col:720px;
+  --shadow:0 4px 24px rgba(0,0,0,.06);
+}
+[data-theme="dark"]{
+  --bg:#0d0d0c;--bg2:#161614;--card:#1c1917;
+  --border:rgba(255,255,255,.07);--border-h:rgba(255,255,255,.15);
+  --text:#fafaf9;--muted:#a8a29e;--dim:#6b7280;
+  --accent-glow:rgba(5,150,105,.14);
+  --shadow:0 4px 24px rgba(0,0,0,.3);
+}
+
+/* Theme transitions */
+.theme-transitioning *{transition:background-color .3s,border-color .3s,color .3s,box-shadow .3s !important}
+
 html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--dim) var(--bg);overflow-x:hidden}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;width:100%;max-width:100vw}
 .mono{font-family:'JetBrains Mono',monospace}.serif{font-family:'Newsreader',serif;font-style:italic}
@@ -21,7 +58,7 @@ a{color:inherit;text-decoration:none}::selection{background:rgba(5,150,105,.15)}
 #scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));z-index:1001;width:0}
 
 /* ═══ MOUSE SPOTLIGHT ═══ */
-#spotlight{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(5,150,105,.035),transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .4s}
+#spotlight{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(5,150,105,.035),transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);opacity:0;transition:opacity .4s}
 
 /* ═══ PARTICLES ═══ */
 #particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.15}
@@ -40,12 +77,32 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
 /* ═══ NAV ═══ */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .4s}
 nav.scrolled{background:rgba(250,250,249,.88);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:var(--col);margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+[data-theme="dark"] nav.scrolled{background:rgba(13,13,12,.9)}
+.nav-inner{max-width:var(--col);margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .nav-name{font-weight:600;font-size:.88rem;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
 .nav-logo{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:.72rem;flex-shrink:0}
 .nav-links{display:flex;gap:2px}.nav-links a{padding:6px 12px;font-size:.78rem;color:var(--muted);border-radius:8px;transition:all .25s}.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(0,0,0,.04)}
+[data-theme="dark"] .nav-links a:hover,[data-theme="dark"] .nav-links a.active{background:rgba(255,255,255,.06)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-cmd-hint{padding:4px 8px;font-size:.6rem;font-family:'JetBrains Mono',monospace;color:var(--dim);border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:all .25s;white-space:nowrap}
+.nav-cmd-hint:hover{border-color:var(--accent);color:var(--accent)}
+.dark-toggle{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .3s;flex-shrink:0}
+.dark-toggle:hover{border-color:var(--accent);color:var(--accent)}
 .nav-cta{padding:8px 18px;font-size:.75rem;font-weight:500;background:var(--text);color:var(--bg);border-radius:8px;transition:all .3s}.nav-cta:hover{opacity:.82;transform:translateY(-1px)}
-@media(max-width:640px){.nav-links{display:none}.nav-inner{padding:12px 16px}}
+.hamburger{display:none;flex-direction:column;gap:4.5px;padding:6px;background:none;border:none;cursor:pointer;z-index:101}
+.hamburger span{display:block;width:18px;height:1.5px;background:var(--text);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media(max-width:640px){.nav-links,.nav-cta,.nav-cmd-hint{display:none}.hamburger{display:flex}.nav-inner{padding:12px 16px}}
+
+/* ═══ MOBILE NAV OVERLAY ═══ */
+.mobile-nav{position:fixed;inset:0;background:var(--bg);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-nav.open{opacity:1;pointer-events:all}
+.mobile-nav a{font-size:1.6rem;font-weight:300;color:var(--muted);padding:10px 32px;transition:all .25s;letter-spacing:-.03em;width:100%;text-align:center}
+.mobile-nav a:hover{color:var(--text)}
+.mobile-nav-footer{margin-top:24px;display:flex;gap:16px}
+.mobile-nav-footer a{font-size:.75rem;color:var(--dim);font-family:'JetBrains Mono',monospace;padding:8px 14px;border:1px solid var(--border);border-radius:7px}
 
 /* ═══ LAYOUT ═══ */
 .container{max-width:var(--col);margin:0 auto;padding:0 24px;position:relative;z-index:2}
@@ -59,9 +116,11 @@ section{padding:48px 0}
 .hero-blob-2{width:min(350px,70vw);height:min(350px,70vw);background:radial-gradient(circle,rgba(8,145,178,.08),transparent 70%);bottom:0;right:-80px;animation:bd 10s ease-in-out infinite -4s}
 @keyframes bd{0%{transform:translate(0,0)}50%{transform:translate(20px,-15px)}100%{transform:translate(0,0)}}
 
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:24px;font-size:.7rem;color:var(--muted);margin-bottom:24px}
-.hero-badge .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:24px;font-size:.7rem;color:var(--muted);margin-bottom:24px;transition:all .3s}
+.hero-badge:hover{border-color:rgba(5,150,105,.3);color:var(--accent)}
+.hero-badge .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(5,150,105,.35)}50%{box-shadow:0 0 0 8px rgba(5,150,105,0)}}
+.live-time{font-family:'JetBrains Mono',monospace;font-size:.65rem;opacity:.7}
 
 .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:300;line-height:1.15;letter-spacing:-.03em;margin-bottom:6px}
 .hero h1 strong{font-weight:700}
@@ -106,14 +165,30 @@ section{padding:48px 0}
 /* ═══ ABOUT ═══ */
 .about-text{font-size:.87rem;color:var(--muted);line-height:1.9}.about-text p{margin-bottom:14px}.hl{color:var(--text);font-weight:500}
 
-/* ═══ FRAMEWORK ═══ */
-.framework-grid{display:grid;gap:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--card)}
-.framework-step{padding:16px 20px;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;border-bottom:1px solid var(--border);transition:all .35s;cursor:default;position:relative;overflow:hidden}
-.framework-step:last-child{border-bottom:none}
-.framework-step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(5,150,105,.05),transparent);transition:width .5s}.framework-step:hover::before{width:100%}
-.step-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(5,150,105,.12);transition:all .3s}
-.framework-step:hover .step-num{background:var(--accent);color:#fff;box-shadow:0 0 16px rgba(5,150,105,.2)}
+/* ═══ FUNNEL / FRAMEWORK ═══ */
+.funnel-container{position:relative;display:flex;flex-direction:column;gap:6px}
+.funnel-container::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent2),var(--accent3),transparent);transform:translateX(-50%);opacity:.12;pointer-events:none}
+.funnel-step-wrap{margin:0 auto;width:100%;transition:all .4s cubic-bezier(.22,1,.36,1)}
+.funnel-step-wrap:nth-child(1){max-width:100%}
+.funnel-step-wrap:nth-child(2){max-width:95%}
+.funnel-step-wrap:nth-child(3){max-width:88%}
+.funnel-step-wrap:nth-child(4){max-width:80%}
+.funnel-step-wrap:nth-child(5){max-width:71%}
+.funnel-step-wrap:nth-child(6){max-width:61%}
+.funnel-step{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;transition:all .35s;cursor:default;position:relative;overflow:hidden}
+.funnel-step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--accent-glow),transparent);transition:width .5s}
+.funnel-step:hover::before{width:100%}
+.funnel-step:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.funnel-step-wrap:nth-child(1) .funnel-step{border-left:2px solid var(--accent)}
+.funnel-step-wrap:nth-child(2) .funnel-step{border-left:2px solid #10b981}
+.funnel-step-wrap:nth-child(3) .funnel-step{border-left:2px solid var(--accent2)}
+.funnel-step-wrap:nth-child(4) .funnel-step{border-left:2px solid #0ea5e9}
+.funnel-step-wrap:nth-child(5) .funnel-step{border-left:2px solid var(--accent3)}
+.funnel-step-wrap:nth-child(6) .funnel-step{border-left:2px solid #8b5cf6}
+.step-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(5,150,105,.12);transition:all .3s;flex-shrink:0}
+.funnel-step:hover .step-num{background:var(--accent);color:#fff;box-shadow:0 0 16px rgba(5,150,105,.2)}
 .step-title{font-size:.82rem;font-weight:600;margin-bottom:3px}.step-desc{font-size:.74rem;color:var(--muted);line-height:1.6}
+@media(max-width:640px){.funnel-step-wrap{max-width:100% !important}.funnel-container::before{display:none}.funnel-step{border-left-width:2px !important}}
 
 /* ═══ TIMELINE ═══ */
 .timeline{position:relative}.timeline::before{content:'';position:absolute;left:15px;top:6px;bottom:6px;width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent2),var(--accent3),var(--dim),transparent)}
@@ -121,19 +196,21 @@ section{padding:48px 0}
 .timeline-dot{position:absolute;left:9px;top:7px;width:13px;height:13px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);z-index:1;transition:all .4s}
 .timeline-item:hover .timeline-dot{background:var(--accent);box-shadow:0 0 14px rgba(5,150,105,.3);transform:scale(1.15)}
 .timeline-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:all .4s}
-.timeline-item:hover .timeline-card{border-color:var(--border-h);transform:translateX(4px);box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.timeline-item:hover .timeline-card{border-color:var(--border-h);transform:translateX(4px);box-shadow:var(--shadow)}
 .timeline-company{font-size:.88rem;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tl-tag{padding:2px 7px;font-size:.52rem;font-family:'JetBrains Mono',monospace;border-radius:4px;font-weight:500;text-transform:uppercase;letter-spacing:.05em}
 .timeline-role{font-size:.76rem;color:var(--muted);margin-top:2px}.timeline-date{font-size:.66rem;font-family:'JetBrains Mono',monospace;color:var(--dim);margin-top:3px}.timeline-desc{font-size:.74rem;color:var(--dim);margin-top:6px;line-height:1.7}
 
 /* ═══ CASES ═══ */
 .case-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:12px;transition:all .4s;cursor:pointer}
-.case-card:hover{border-color:var(--border-h);transform:translateY(-2px);box-shadow:0 6px 30px rgba(0,0,0,.06)}
+.case-card:hover{border-color:var(--border-h);transform:translateY(-2px);box-shadow:var(--shadow)}
+.case-card:focus{outline:2px solid var(--accent);outline-offset:2px}
 .case-card-header{padding:18px 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .case-tag{padding:3px 8px;font-size:.58rem;font-family:'JetBrains Mono',monospace;border-radius:4px;white-space:nowrap}
 .case-tag.fintech{background:rgba(8,145,178,.08);color:var(--accent2);border:1px solid rgba(8,145,178,.15)}
 .case-tag.health{background:rgba(5,150,105,.08);color:var(--accent);border:1px solid rgba(5,150,105,.15)}
 .case-title{font-size:.9rem;font-weight:600;margin-bottom:2px}.case-meta{font-size:.7rem;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.case-read-time{font-size:.58rem;color:var(--dim);font-family:'JetBrains Mono',monospace;padding:2px 6px;border:1px solid var(--border);border-radius:4px;white-space:nowrap}
 .case-chevron{transition:transform .4s;color:var(--dim);font-size:.75rem;flex-shrink:0;margin-top:4px}
 .case-body{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.22,1,.36,1)}.case-card.open .case-body{max-height:700px}.case-card.open .case-chevron{transform:rotate(180deg)}
 .case-inner{padding:0 20px 20px;border-top:1px solid var(--border)}.case-section{margin-top:14px}
@@ -178,13 +255,15 @@ section{padding:48px 0}
 .proj-link{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:1px solid var(--border);border-radius:7px;font-size:.7rem;color:var(--muted);transition:all .3s;font-family:'Outfit',sans-serif;text-decoration:none;cursor:pointer;background:none}
 .proj-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
 .proj-link.primary{background:var(--text);color:var(--bg);border-color:var(--text)}.proj-link.primary:hover{opacity:.85}
-.proj-no-img{height:200px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg2),var(--card));font-size:2.5rem;opacity:.3}
 
-@media(max-width:640px){
-  .proj-img-wrap{height:160px}
-  .proj-body{padding:14px 16px}
-  .proj-no-img{height:140px}
-}
+/* ═══ CODE PREVIEW (E-commerce project) ═══ */
+.proj-code-preview{height:200px;background:#0d1117;border-radius:0;overflow:hidden;position:relative}
+.code-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#161b22;border-bottom:1px solid rgba(255,255,255,.06)}
+.code-dots{display:flex;gap:5px}.code-dots span{width:10px;height:10px;border-radius:50%}
+.code-filename{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#6e7681;margin-left:4px}
+.code-body{padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.68rem;line-height:1.8}
+.code-line{white-space:nowrap;overflow:hidden}.code-kw{color:#ff7b72}.code-str{color:#a5d6ff}.code-fn{color:#d2a8ff}.code-comment{color:#8b949e}.code-val{color:#79c0ff}.code-out{color:#3fb950}
+@media(max-width:640px){.proj-img-wrap,.proj-code-preview{height:160px}.proj-body{padding:14px 16px}}
 
 /* ═══ SKILLS ═══ */
 .skills-grouped{display:grid;gap:20px}.skill-group h3{font-size:.72rem;font-family:'JetBrains Mono',monospace;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px}.skill-group h3::before{content:'//';color:var(--dim)}
@@ -222,44 +301,31 @@ section{padding:48px 0}
 /* ═══ CONTACT ═══ */
 .contact-section{text-align:center;padding:56px 0 64px}.contact-section .sec-label{justify-content:center}
 .contact-links{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}
-.contact-link{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);transition:all .4s;min-width:140px}
+.contact-link{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);transition:all .4s;min-width:140px;position:relative}
 .contact-link:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 6px 24px rgba(5,150,105,.06)}
 .contact-link .label{font-size:.55rem;text-transform:uppercase;letter-spacing:.15em;color:var(--dim);font-family:'JetBrains Mono',monospace}
 .contact-link .value{font-size:.78rem;color:var(--text);font-weight:500}
+.copy-btn{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:5px;border:1px solid var(--border);background:var(--bg2);color:var(--dim);font-size:.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;opacity:0}
+.contact-link:hover .copy-btn{opacity:1}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--text);color:var(--bg);padding:10px 20px;border-radius:8px;font-size:.75rem;z-index:400;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;font-family:'JetBrains Mono',monospace}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ═══ MISC ═══ */
-footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}footer span{font-size:.65rem;color:var(--dim);font-family:'JetBrains Mono',monospace}
-#scroll-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:9px;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:.9rem;cursor:pointer;z-index:99;opacity:0;transform:translateY(10px);transition:all .4s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-#scroll-top.show{opacity:1;transform:translateY(0)}#scroll-top:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);max-width:160px;margin:0 auto}
+#scroll-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:9px;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:.9rem;cursor:pointer;z-index:99;opacity:0;transform:translateY(10px);transition:all .4s;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+#scroll-top.show{opacity:1;transform:translateY(0)}#scroll-top:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 
-/* ═══ RESPONSIVE ═══ */
-@media(max-width:640px){
-  .hero{padding-top:60px}
-  .hero h1{font-size:1.7rem}
-  .hero-btns{flex-direction:column;width:100%}
-  .btn{width:100%;justify-content:center}
-  .marquee-item{padding:14px 16px}
-  .marquee-val{font-size:.95rem}
-  .marquee-label{font-size:.55rem}
-  .framework-step{grid-template-columns:36px 1fr;padding:14px 16px;gap:10px}
-  .timeline-item{padding-left:38px;margin-bottom:18px}
-  .timeline-card{padding:14px 16px}
-  .contact-links{flex-direction:column;align-items:center}
-  .contact-link{min-width:auto;width:100%}
-  .contact-link .value{font-size:.72rem;word-break:break-all}
-  .hero-blob{display:none}
-  .testimonial-card:hover{transform:none}
-  .timeline-item:hover .timeline-card{transform:none}
-  .domain-pill{padding:6px 12px;font-size:.72rem}
-  #spotlight{display:none}
-}
-@media(max-width:380px){
-  .hero-tags{gap:4px}.tag{font-size:.58rem;padding:3px 8px}
-  .sec-title{font-size:1.2rem}
-  .marquee-item{padding:12px 12px}
-  .marquee-val{font-size:.85rem}
-}
+/* ═══ FOOTER ═══ */
+footer{border-top:1px solid var(--border);padding:28px 0}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.footer-wit{font-size:.72rem;color:var(--muted);font-style:italic}
+.footer-nav{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.footer-nav a{font-size:.65rem;font-family:'JetBrains Mono',monospace;color:var(--dim);transition:color .25s}
+.footer-nav a:hover{color:var(--accent)}
+.footer-copy{font-size:.62rem;color:var(--dim);font-family:'JetBrains Mono',monospace}
 
 /* ═══ RESUME MODAL ═══ */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
@@ -282,52 +348,268 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
 .form-success .check{width:48px;height:48px;border-radius:50%;background:rgba(5,150,105,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:1.4rem}
 .form-success h4{font-size:.9rem;font-weight:600;margin-bottom:6px}
 .form-success p{font-size:.78rem;color:var(--muted)}
+
+/* ═══ COMMAND PALETTE ═══ */
+.palette-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);z-index:500;display:none;align-items:flex-start;justify-content:center;padding:80px 20px 20px}
+.palette-overlay.active{display:flex;animation:fadeIn .15s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.palette{background:var(--card);border:1px solid var(--border);border-radius:16px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:paletteIn .2s cubic-bezier(.22,1,.36,1)}
+@keyframes paletteIn{from{opacity:0;transform:translateY(-12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.palette-search{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--border)}
+.palette-search-icon{color:var(--dim);font-size:.9rem;flex-shrink:0}
+.palette-input{flex:1;background:none;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:.9rem;color:var(--text)}
+.palette-input::placeholder{color:var(--dim)}
+.palette-esc{padding:3px 7px;font-size:.55rem;font-family:'JetBrains Mono',monospace;color:var(--dim);border:1px solid var(--border);border-radius:4px}
+.palette-results{max-height:360px;overflow-y:auto}
+.palette-group-label{padding:10px 18px 4px;font-size:.58rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--dim)}
+.palette-item{display:flex;align-items:center;gap:12px;padding:10px 18px;cursor:pointer;transition:background .15s}
+.palette-item:hover,.palette-item.selected{background:var(--bg2)}
+.palette-item-icon{width:32px;height:32px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.palette-item.selected .palette-item-icon{background:var(--accent);border-color:var(--accent);color:#fff}
+.palette-item-label{font-size:.82rem;font-weight:500;color:var(--text)}
+.palette-item-desc{font-size:.68rem;color:var(--dim);margin-top:1px}
+.palette-footer{padding:8px 18px;border-top:1px solid var(--border);display:flex;gap:16px}
+.palette-footer span{font-size:.58rem;font-family:'JetBrains Mono',monospace;color:var(--dim);display:flex;align-items:center;gap:5px}
+.palette-footer kbd{padding:2px 5px;background:var(--bg2);border:1px solid var(--border);border-radius:3px;font-size:.55rem}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:640px){
+  .hero{padding-top:60px}
+  .hero h1{font-size:1.7rem}
+  .hero-btns{flex-direction:column;width:100%}
+  .btn{width:100%;justify-content:center}
+  .marquee-item{padding:14px 16px}
+  .marquee-val{font-size:.95rem}
+  .marquee-label{font-size:.55rem}
+  .timeline-item{padding-left:38px;margin-bottom:18px}
+  .timeline-card{padding:14px 16px}
+  .contact-links{flex-direction:column;align-items:center}
+  .contact-link{min-width:auto;width:100%}
+  .contact-link .value{font-size:.72rem;word-break:break-all}
+  .hero-blob{display:none}
+  .testimonial-card:hover{transform:none}
+  .timeline-item:hover .timeline-card{transform:none}
+  .domain-pill{padding:6px 12px;font-size:.72rem}
+  #spotlight{display:none}
+  .copy-btn{opacity:1}
+  .palette-overlay{padding:60px 12px 12px}
+}
+@media(max-width:380px){
+  .hero-tags{gap:4px}.tag{font-size:.58rem;padding:3px 8px}
+  .sec-title{font-size:1.2rem}
+  .marquee-item{padding:12px 12px}
+  .marquee-val{font-size:.85rem}
+}
 </style>
 </head>
 <body>
 <div id="scroll-progress"></div>
 <div id="spotlight"></div>
 <canvas id="particles"></canvas>
+<div class="toast" id="toast"></div>
 
-<nav id="nav"><div class="nav-inner"><div class="nav-name"><div class="nav-logo">SP</div>Sanal Pillai</div><div class="nav-links"><a href="#about">About</a><a href="#experience">Work</a><a href="#cases">Cases</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div><a href="#contact" class="nav-cta">Get in Touch</a></div></nav>
+<!-- ═══ COMMAND PALETTE ═══ -->
+<div class="palette-overlay" id="palette" onclick="if(event.target===this)closePalette()">
+  <div class="palette">
+    <div class="palette-search">
+      <span class="palette-search-icon">⌕</span>
+      <input class="palette-input" id="paletteInput" placeholder="Search — navigate, copy email, toggle theme…" autocomplete="off"/>
+      <span class="palette-esc">ESC</span>
+    </div>
+    <div class="palette-results" id="paletteResults"></div>
+    <div class="palette-footer">
+      <span><kbd>↑↓</kbd> Navigate</span>
+      <span><kbd>↵</kbd> Select</span>
+      <span><kbd>ESC</kbd> Close</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MOBILE NAV ═══ -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#experience" onclick="closeMobileNav()">Work</a>
+  <a href="#cases" onclick="closeMobileNav()">Cases</a>
+  <a href="#projects" onclick="closeMobileNav()">Projects</a>
+  <a href="#skills" onclick="closeMobileNav()">Skills</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  <div class="mobile-nav-footer">
+    <a href="mailto:sanal.pillai97@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/sanalpillai97/" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-name"><div class="nav-logo">SP</div>Sanal Pillai</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Work</a>
+      <a href="#cases">Cases</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-cmd-hint" onclick="openPalette()">⌘K</div>
+      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" aria-label="Toggle dark mode">🌙</button>
+      <a href="#contact" class="nav-cta">Get in Touch</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
 
 <section class="hero" id="top">
 <div class="hero-blob hero-blob-1"></div>
 <div class="hero-blob hero-blob-2"></div>
 <div class="container">
-  <div class="hero-badge blur-in"><span class="dot"></span>Available for opportunities</div>
+  <a href="#contact" class="hero-badge blur-in" style="text-decoration:none">
+    <span class="dot"></span>
+    Open to opportunities&thinsp;·&thinsp;<span class="live-time" id="liveTime"></span>
+  </a>
   <h1 class="blur-in d1">I'm <strong><span class="name-hl">Sanal Pillai</span></strong>,<br/><span class="typewriter-line">a <span id="typewriter"></span><span class="cursor-blink"></span></span></h1>
   <p class="hero-desc blur-in d2"><strong>6+ years</strong> driving acquisition, activation, lifecycle optimization, experimentation, and monetization strategy across <strong>fintech, healthtech, consulting</strong>, and <strong>consumer products</strong>.</p>
-  <p class="hero-meta blur-in d3">BCG · Stripe · Avanzar Health · Mety Technology</p>
+  <p class="hero-meta blur-in d3">BCG · Stripe · Avanzar Health</p>
   <div class="hero-btns blur-in d3"><a href="#cases" class="btn btn-primary">View Case Studies <span class="arrow arrow-down">↓</span></a><a href="javascript:void(0)" onclick="openModal()" class="btn btn-ghost">Request Resume <span class="arrow">→</span></a></div>
   <div class="hero-tags blur-in d4"><span class="tag">Growth Analytics</span><span class="tag">Experimentation</span><span class="tag">Funnel Optimization</span><span class="tag">Lifecycle & Retention</span><span class="tag">Attribution Modeling</span><span class="tag">Revenue Analytics</span></div>
 </div>
 </section>
 
-<div class="marquee-section"><div class="marquee-track">
-<div class="marquee-item"><span class="marquee-val">$14M</span><span class="marquee-label">Revenue Sized</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">1.6M+</span><span class="marquee-label">Lifecycle Events</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">$9M</span><span class="marquee-label">Media Spend</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">$3.2M</span><span class="marquee-label">Contract Value</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">380K+</span><span class="marquee-label">Sign-ups</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">1.1M+</span><span class="marquee-label">Profiles</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">60+</span><span class="marquee-label">Clients</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">$14M</span><span class="marquee-label">Revenue Sized</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">1.6M+</span><span class="marquee-label">Lifecycle Events</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">$9M</span><span class="marquee-label">Media Spend</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">$3.2M</span><span class="marquee-label">Contract Value</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">380K+</span><span class="marquee-label">Sign-ups</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">1.1M+</span><span class="marquee-label">Profiles</span></div><div class="marquee-sep"></div>
-<div class="marquee-item"><span class="marquee-val">60+</span><span class="marquee-label">Clients</span></div><div class="marquee-sep"></div>
-</div></div>
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-val" data-count-prefix="$" data-count-val="14" data-count-suffix="M">$14M</span><span class="marquee-label">Revenue Sized</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val" data-count-val="1.6" data-count-suffix="M+">1.6M+</span><span class="marquee-label">Lifecycle Events</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val" data-count-prefix="$" data-count-val="9" data-count-suffix="M">$9M</span><span class="marquee-label">Media Spend</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val" data-count-prefix="$" data-count-val="3.2" data-count-suffix="M">$3.2M</span><span class="marquee-label">Contract Value</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val" data-count-val="380" data-count-suffix="K+">380K+</span><span class="marquee-label">Sign-ups</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val" data-count-val="1.1" data-count-suffix="M+">1.1M+</span><span class="marquee-label">Profiles</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val" data-count-val="60" data-count-suffix="+">60+</span><span class="marquee-label">Clients</span></div><div class="marquee-sep"></div>
+    <!-- duplicate for infinite scroll -->
+    <div class="marquee-item"><span class="marquee-val">$14M</span><span class="marquee-label">Revenue Sized</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val">1.6M+</span><span class="marquee-label">Lifecycle Events</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val">$9M</span><span class="marquee-label">Media Spend</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val">$3.2M</span><span class="marquee-label">Contract Value</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val">380K+</span><span class="marquee-label">Sign-ups</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val">1.1M+</span><span class="marquee-label">Profiles</span></div><div class="marquee-sep"></div>
+    <div class="marquee-item"><span class="marquee-val">60+</span><span class="marquee-label">Clients</span></div><div class="marquee-sep"></div>
+  </div>
+</div>
 
-<section id="about"><div class="container"><div class="sec-label reveal">About</div><h2 class="sec-title reveal">The <span class="serif">short version</span></h2><div class="about-text reveal d1"><p>I'm a growth and product analytics leader who's spent 6+ years at the intersection of <span class="hl">data</span>, <span class="hl">product</span>, and <span class="hl">business strategy</span>. I've worked at BCG building financial models for Fortune 500 clients, at Stripe sizing monetization experiments and diagnosing acquisition funnels, at Avanzar leading analytics across 60+ healthcare clients, and most recently at Mety measuring AI recommendation impact on user behavior.</p><p>I care about one thing: making sure the numbers actually <span class="hl">change the decision</span>. Not dashboards for dashboards' sake — but the kind of analysis that makes a PM reprioritize their roadmap or a VP reallocate budget mid-quarter.</p><p style="color:var(--dim);font-style:italic;font-size:.82rem">M.S. Information Systems, Northeastern · B.E. Computer Science, Mumbai · I think in funnels, experiment in cohorts, and present in narratives.</p></div></div></section>
+<section id="about"><div class="container"><div class="sec-label reveal">About</div><h2 class="sec-title reveal">The <span class="serif">short version</span></h2><div class="about-text reveal d1"><p>I'm a growth and product analytics leader who's spent 6+ years at the intersection of <span class="hl">data</span>, <span class="hl">product</span>, and <span class="hl">business strategy</span>. I've worked at BCG building financial models for Fortune 500 clients, at Stripe sizing monetization experiments and diagnosing acquisition funnels, at Avanzar leading analytics across 60+ healthcare clients, and most recently at an AI healthtech startup measuring recommendation impact on user behavior.</p><p>I care about one thing: making sure the numbers actually <span class="hl">change the decision</span>. Not dashboards for dashboards' sake — but the kind of analysis that makes a PM reprioritize their roadmap or a VP reallocate budget mid-quarter.</p><p style="color:var(--dim);font-style:italic;font-size:.82rem">M.S. Information Systems, Northeastern · B.E. Computer Science, Mumbai · I think in funnels, experiment in cohorts, and present in narratives.</p></div></div></section>
 <div class="divider"></div>
-<section><div class="container"><div class="sec-label reveal">Framework</div><h2 class="sec-title reveal">How I approach a <span class="serif">growth problem</span></h2><p class="sec-sub reveal">From ambiguity to action.</p><div class="framework-grid reveal d1"><div class="framework-step"><div class="step-num">01</div><div><div class="step-title">Map the System</div><div class="step-desc">Understand the full user journey and business model before touching data.</div></div></div><div class="framework-step"><div class="step-num">02</div><div><div class="step-title">Instrument & Measure</div><div class="step-desc">Define the right KPIs, ensure clean instrumentation, establish baselines.</div></div></div><div class="framework-step"><div class="step-num">03</div><div><div class="step-title">Diagnose the Funnel</div><div class="step-desc">Acquisition, activation, retention, or monetization? Each demands a different playbook.</div></div></div><div class="framework-step"><div class="step-num">04</div><div><div class="step-title">Size & Prioritize</div><div class="step-desc">Size the opportunity, estimate effort, and stack-rank ruthlessly.</div></div></div><div class="framework-step"><div class="step-num">05</div><div><div class="step-title">Experiment & Measure</div><div class="step-desc">Design the test, define success upfront, run cleanly, read out honestly.</div></div></div><div class="framework-step"><div class="step-num">06</div><div><div class="step-title">Operationalize</div><div class="step-desc">Scale it. Automate tracking, document logic, hand off so it runs without you.</div></div></div></div></div></section>
+
+<section><div class="container">
+  <div class="sec-label reveal">Framework</div>
+  <h2 class="sec-title reveal">How I approach a <span class="serif">growth problem</span></h2>
+  <p class="sec-sub reveal">From ambiguity to action — each layer narrows the focus.</p>
+  <div class="funnel-container reveal d1">
+    <div class="funnel-step-wrap">
+      <div class="funnel-step">
+        <div class="step-num">01</div>
+        <div><div class="step-title">Map the System</div><div class="step-desc">Understand the full user journey and business model before touching data.</div></div>
+      </div>
+    </div>
+    <div class="funnel-step-wrap">
+      <div class="funnel-step">
+        <div class="step-num">02</div>
+        <div><div class="step-title">Instrument & Measure</div><div class="step-desc">Define the right KPIs, ensure clean instrumentation, establish baselines.</div></div>
+      </div>
+    </div>
+    <div class="funnel-step-wrap">
+      <div class="funnel-step">
+        <div class="step-num">03</div>
+        <div><div class="step-title">Diagnose the Funnel</div><div class="step-desc">Acquisition, activation, retention, or monetization? Each demands a different playbook.</div></div>
+      </div>
+    </div>
+    <div class="funnel-step-wrap">
+      <div class="funnel-step">
+        <div class="step-num">04</div>
+        <div><div class="step-title">Size & Prioritize</div><div class="step-desc">Size the opportunity, estimate effort, and stack-rank ruthlessly.</div></div>
+      </div>
+    </div>
+    <div class="funnel-step-wrap">
+      <div class="funnel-step">
+        <div class="step-num">05</div>
+        <div><div class="step-title">Experiment & Measure</div><div class="step-desc">Design the test, define success upfront, run cleanly, read out honestly.</div></div>
+      </div>
+    </div>
+    <div class="funnel-step-wrap">
+      <div class="funnel-step">
+        <div class="step-num">06</div>
+        <div><div class="step-title">Operationalize</div><div class="step-desc">Scale it. Automate tracking, document logic, hand off so it runs without you.</div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
 <div class="divider"></div>
-<section id="experience"><div class="container"><div class="sec-label reveal">Experience</div><h2 class="sec-title reveal">Where I've <span class="serif">worked</span></h2><div class="timeline"><div class="timeline-item reveal d1"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-company">Mety Technology <span class="tl-tag" style="background:rgba(5,150,105,.08);color:var(--accent)">Latest</span></div><div class="timeline-role">Sr. Business Analyst, Product & Data Growth Analytics</div><div class="timeline-date">May 2025 – Apr 2026 · Boston, MA</div><div class="timeline-desc">Analyzed 1.1M+ health profiles, measured AI recommendation impact across 25K+ plans, built lifecycle funnel models from onboarding to sustained engagement.</div></div></div><div class="timeline-item reveal d2"><div class="timeline-dot" style="border-color:var(--accent2)"></div><div class="timeline-card"><div class="timeline-company">Avanzar Health</div><div class="timeline-role">Business Director, Product Analytics & Growth Strategy</div><div class="timeline-date">Jan 2020 – Jul 2023 · Mumbai, India</div><div class="timeline-desc">Owned analytics for 60+ healthcare clients. Built attribution models across $9M in media spend. Drove $3.2M in incremental contract value.</div></div></div><div class="timeline-item reveal d3"><div class="timeline-dot" style="border-color:var(--accent3)"></div><div class="timeline-card"><div class="timeline-company">Stripe</div><div class="timeline-role">Sr. Business Analyst, Product Analytics & Payments Strategy</div><div class="timeline-date">Apr 2019 – Dec 2019 · Mumbai, India</div><div class="timeline-desc">Evaluated 380K+ sign-ups, sized $14M in subscription revenue experiments, analyzed 1.6M+ lifecycle events for cross-sell prioritization.</div></div></div><div class="timeline-item reveal d4"><div class="timeline-dot" style="border-color:var(--dim)"></div><div class="timeline-card"><div class="timeline-company">Boston Consulting Group</div><div class="timeline-role">BI & Analytics Associate</div><div class="timeline-date">Apr 2018 – Mar 2019 · Mumbai, India</div><div class="timeline-desc">Scenario models for cost drivers and revenue sensitivities. 8–12 structured workbooks per engagement. 10+ peer benchmarks per case.</div></div></div></div></div></section>
+
+<section id="experience"><div class="container"><div class="sec-label reveal">Experience</div><h2 class="sec-title reveal">Where I've <span class="serif">worked</span></h2><div class="timeline">
+  <div class="timeline-item reveal d1"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-company">AI Healthtech Startup <span class="tl-tag" style="background:rgba(5,150,105,.08);color:var(--accent)">Latest</span></div><div class="timeline-role">Sr. Business Analyst, Product & Data Growth Analytics</div><div class="timeline-date">May 2025 – Apr 2026 · Boston, MA</div><div class="timeline-desc">Analyzed 1.1M+ health profiles, measured AI recommendation impact across 25K+ plans, built lifecycle funnel models from onboarding to sustained engagement.</div></div></div>
+  <div class="timeline-item reveal d2"><div class="timeline-dot" style="border-color:var(--accent2)"></div><div class="timeline-card"><div class="timeline-company">Avanzar Health</div><div class="timeline-role">Business Director, Product Analytics & Growth Strategy</div><div class="timeline-date">Jan 2020 – Jul 2023 · Mumbai, India</div><div class="timeline-desc">Owned analytics for 60+ healthcare clients. Built attribution models across $9M in media spend. Drove $3.2M in incremental contract value.</div></div></div>
+  <div class="timeline-item reveal d3"><div class="timeline-dot" style="border-color:var(--accent3)"></div><div class="timeline-card"><div class="timeline-company">Stripe</div><div class="timeline-role">Sr. Business Analyst, Product Analytics & Payments Strategy</div><div class="timeline-date">Apr 2019 – Dec 2019 · Mumbai, India</div><div class="timeline-desc">Evaluated 380K+ sign-ups, sized $14M in subscription revenue experiments, analyzed 1.6M+ lifecycle events for cross-sell prioritization.</div></div></div>
+  <div class="timeline-item reveal d4"><div class="timeline-dot" style="border-color:var(--dim)"></div><div class="timeline-card"><div class="timeline-company">Boston Consulting Group</div><div class="timeline-role">BI & Analytics Associate</div><div class="timeline-date">Apr 2018 – Mar 2019 · Mumbai, India</div><div class="timeline-desc">Scenario models for cost drivers and revenue sensitivities. 8–12 structured workbooks per engagement. 10+ peer benchmarks per case.</div></div></div>
+</div></div></section>
 <div class="divider"></div>
-<section id="cases"><div class="container"><div class="sec-label reveal">Case Studies</div><h2 class="sec-title reveal">Selected <span class="serif">work</span></h2><p class="sec-sub reveal">Click to expand.</p><div class="case-card reveal d1" onclick="toggleCase(this)"><div class="case-card-header"><div><div class="case-title">Acquisition Funnel Diagnostics</div><div class="case-meta">Stripe · 380K+ sign-ups</div></div><div style="display:flex;align-items:center;gap:8px"><span class="case-tag fintech">Fintech</span><span class="case-chevron">▾</span></div></div><div class="case-body"><div class="case-inner"><div class="case-section"><h4>Problem</h4><p>380K+ new users entering through four channels with wildly varying activation rates and no clear drop-off picture.</p></div><div class="case-section"><h4>Approach</h4><p>Segmented by entry point, mapped cohorts through onboarding, identified messaging mismatches between acquisition promise and activation UX.</p></div><div class="case-section"><h4>Outcome</h4><p>Lifecycle email entrants showed 2.3x higher activation with personalized onboarding. Findings directly shaped experiments.</p></div><div class="case-metrics"><span class="case-metric"><span>380K+</span> sign-ups</span><span class="case-metric"><span>2.3x</span> activation lift</span><span class="case-metric"><span>4</span> channels</span></div></div></div></div><div class="case-card reveal d2" onclick="toggleCase(this)"><div class="case-card-header"><div><div class="case-title">Monetization Experiment Sizing</div><div class="case-meta">Stripe · $14M revenue evaluated</div></div><div style="display:flex;align-items:center;gap:8px"><span class="case-tag fintech">Fintech</span><span class="case-chevron">▾</span></div></div><div class="case-body"><div class="case-inner"><div class="case-section"><h4>Problem</h4><p>Leadership needed annualized revenue impact of pricing, gating, and trial-length experiments before committing engineering.</p></div><div class="case-section"><h4>Approach</h4><p>Built sizing framework modeling incremental impact on conversion and early retention cohorts across experiment types.</p></div><div class="case-section"><h4>Outcome</h4><p>Framework became org-wide standard. Two pricing changes shipped with measurable early-cohort retention uplift.</p></div><div class="case-metrics"><span class="case-metric"><span>$14M</span> sized</span><span class="case-metric"><span>2</span> shipped</span><span class="case-metric"><span>Template</span> adopted</span></div></div></div></div><div class="case-card reveal d3" onclick="toggleCase(this)"><div class="case-card-header"><div><div class="case-title">Attribution & Incrementality Modeling</div><div class="case-meta">Avanzar · $9M media spend</div></div><div style="display:flex;align-items:center;gap:8px"><span class="case-tag health">Healthcare</span><span class="case-chevron">▾</span></div></div><div class="case-body"><div class="case-inner"><div class="case-section"><h4>Problem</h4><p>Last-click attribution inflating branded search, undervaluing upper-funnel channels across 60+ client budgets.</p></div><div class="case-section"><h4>Approach</h4><p>Multi-touch attribution models and lift studies isolating incremental demand. Reusable framework for full portfolio.</p></div><div class="case-section"><h4>Outcome</h4><p>Budget reallocation across 30+ accounts. $3.2M in incremental contract renewals.</p></div><div class="case-metrics"><span class="case-metric"><span>$9M</span> modeled</span><span class="case-metric"><span>$3.2M</span> value</span><span class="case-metric"><span>60+</span> clients</span></div></div></div></div><div class="case-card reveal d4" onclick="toggleCase(this)"><div class="case-card-header"><div><div class="case-title">AI Recommendation Impact</div><div class="case-meta">Mety · 1.1M+ profiles</div></div><div style="display:flex;align-items:center;gap:8px"><span class="case-tag health">Healthtech</span><span class="case-chevron">▾</span></div></div><div class="case-body"><div class="case-inner"><div class="case-section"><h4>Problem</h4><p>Were AI lifestyle recommendations driving sustained behavior change or engagement that faded after first interaction?</p></div><div class="case-section"><h4>Approach</h4><p>Behavior segmentation across 1.1M+ profiles. Linked 25K+ plan engagement signals to sustained change proxies.</p></div><div class="case-section"><h4>Outcome</h4><p>Identified retention-correlated recommendation types. Prioritized algo refinement and UX changes.</p></div><div class="case-metrics"><span class="case-metric"><span>1.1M+</span> profiles</span><span class="case-metric"><span>25K+</span> plans</span><span class="case-metric"><span>Algo</span> refined</span></div></div></div></div></div></section>
+
+<section id="cases"><div class="container">
+  <div class="sec-label reveal">Case Studies</div>
+  <h2 class="sec-title reveal">Selected <span class="serif">work</span></h2>
+  <p class="sec-sub reveal">Click to expand — or press ↵ from keyboard.</p>
+
+  <div class="case-card reveal d1" tabindex="0" onclick="toggleCase(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCase(this)}">
+    <div class="case-card-header">
+      <div><div class="case-title">Acquisition Funnel Diagnostics</div><div class="case-meta">Stripe · 380K+ sign-ups</div></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="case-read-time">~2 min</span><span class="case-tag fintech">Fintech</span><span class="case-chevron">▾</span></div>
+    </div>
+    <div class="case-body"><div class="case-inner">
+      <div class="case-section"><h4>Problem</h4><p>380K+ new users entering through four channels with wildly varying activation rates and no clear drop-off picture.</p></div>
+      <div class="case-section"><h4>Approach</h4><p>Segmented by entry point, mapped cohorts through onboarding, identified messaging mismatches between acquisition promise and activation UX.</p></div>
+      <div class="case-section"><h4>Outcome</h4><p>Lifecycle email entrants showed 2.3x higher activation with personalized onboarding. Findings directly shaped experiments.</p></div>
+      <div class="case-metrics"><span class="case-metric"><span>380K+</span> sign-ups</span><span class="case-metric"><span>2.3x</span> activation lift</span><span class="case-metric"><span>4</span> channels</span></div>
+    </div></div>
+  </div>
+
+  <div class="case-card reveal d2" tabindex="0" onclick="toggleCase(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCase(this)}">
+    <div class="case-card-header">
+      <div><div class="case-title">Monetization Experiment Sizing</div><div class="case-meta">Stripe · $14M revenue evaluated</div></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="case-read-time">~3 min</span><span class="case-tag fintech">Fintech</span><span class="case-chevron">▾</span></div>
+    </div>
+    <div class="case-body"><div class="case-inner">
+      <div class="case-section"><h4>Problem</h4><p>Leadership needed annualized revenue impact of pricing, gating, and trial-length experiments before committing engineering.</p></div>
+      <div class="case-section"><h4>Approach</h4><p>Built sizing framework modeling incremental impact on conversion and early retention cohorts across experiment types.</p></div>
+      <div class="case-section"><h4>Outcome</h4><p>Framework became org-wide standard. Two pricing changes shipped with measurable early-cohort retention uplift.</p></div>
+      <div class="case-metrics"><span class="case-metric"><span>$14M</span> sized</span><span class="case-metric"><span>2</span> shipped</span><span class="case-metric"><span>Template</span> adopted</span></div>
+    </div></div>
+  </div>
+
+  <div class="case-card reveal d3" tabindex="0" onclick="toggleCase(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCase(this)}">
+    <div class="case-card-header">
+      <div><div class="case-title">Attribution & Incrementality Modeling</div><div class="case-meta">Avanzar · $9M media spend</div></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="case-read-time">~2 min</span><span class="case-tag health">Healthcare</span><span class="case-chevron">▾</span></div>
+    </div>
+    <div class="case-body"><div class="case-inner">
+      <div class="case-section"><h4>Problem</h4><p>Last-click attribution inflating branded search, undervaluing upper-funnel channels across 60+ client budgets.</p></div>
+      <div class="case-section"><h4>Approach</h4><p>Multi-touch attribution models and lift studies isolating incremental demand. Reusable framework for full portfolio.</p></div>
+      <div class="case-section"><h4>Outcome</h4><p>Budget reallocation across 30+ accounts. $3.2M in incremental contract renewals.</p></div>
+      <div class="case-metrics"><span class="case-metric"><span>$9M</span> modeled</span><span class="case-metric"><span>$3.2M</span> value</span><span class="case-metric"><span>60+</span> clients</span></div>
+    </div></div>
+  </div>
+
+  <div class="case-card reveal d4" tabindex="0" onclick="toggleCase(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCase(this)}">
+    <div class="case-card-header">
+      <div><div class="case-title">AI Recommendation Impact</div><div class="case-meta">Healthtech · 1.1M+ profiles</div></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="case-read-time">~3 min</span><span class="case-tag health">Healthtech</span><span class="case-chevron">▾</span></div>
+    </div>
+    <div class="case-body"><div class="case-inner">
+      <div class="case-section"><h4>Problem</h4><p>Were AI lifestyle recommendations driving sustained behavior change or engagement that faded after first interaction?</p></div>
+      <div class="case-section"><h4>Approach</h4><p>Behavior segmentation across 1.1M+ profiles. Linked 25K+ plan engagement signals to sustained change proxies.</p></div>
+      <div class="case-section"><h4>Outcome</h4><p>Identified retention-correlated recommendation types. Prioritized algo refinement and UX changes.</p></div>
+      <div class="case-metrics"><span class="case-metric"><span>1.1M+</span> profiles</span><span class="case-metric"><span>25K+</span> plans</span><span class="case-metric"><span>Algo</span> refined</span></div>
+    </div></div>
+  </div>
+</div></section>
 <div class="divider"></div>
 
 <!-- ═══ PROJECTS ═══ -->
@@ -341,18 +623,16 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
 <div class="proj-card reveal d1">
   <div class="proj-img-wrap" data-proj="diabetes">
     <div class="proj-badges"><span class="proj-badge cat">ML / Healthcare</span><span class="proj-badge live">Live App ↗</span></div>
-    <img src="https://github.com/sanalpillai/Diabetes-Prediction/blob/main/streamlit_application.JPG?raw=true" alt="Diabetes Prediction App" loading="lazy"/>
+    <img src="https://github.com/sanalpillai/Diabetes-Prediction/blob/main/streamlit_application.JPG?raw=true" alt="Diabetes Prediction App" loading="lazy" width="720" height="200"/>
     <div class="proj-img-dots"><span class="proj-img-dot active"></span></div>
   </div>
   <div class="proj-body">
     <div class="proj-title">Diabetes Prediction App</div>
     <div class="proj-short">End-to-end healthcare ML app that predicts diabetes risk from user health inputs, visualizes feature importance, and generates personalized recommendations with downloadable PDF reports.</div>
-    <div class="proj-tech">
-      <span>Python</span><span>Streamlit</span><span>Scikit-learn</span><span>Random Forest</span><span>Pandas</span><span>PDF Generation</span>
-    </div>
+    <div class="proj-tech"><span>Python</span><span>Streamlit</span><span>Scikit-learn</span><span>Random Forest</span><span>Pandas</span><span>PDF Generation</span></div>
     <button class="proj-toggle" onclick="toggleProj(this)">See details <span class="chevron">▾</span></button>
     <div class="proj-detail"><div class="proj-detail-inner">
-      <p>This project goes beyond a basic prediction by including visual health comparisons, feature importance charts, personalized recommendations, meal suggestions, educational resources, and downloadable PDF reports. It shows that I can build an end-to-end analytics application, not just train a model in a notebook.</p>
+      <p>This project goes beyond a basic prediction by including visual health comparisons, feature importance charts, personalized recommendations, meal suggestions, educational resources, and downloadable PDF reports.</p>
       <ul class="proj-features">
         <li>Diabetes risk prediction using Random Forest classifier</li>
         <li>Interactive Streamlit UI with sidebar health parameter inputs</li>
@@ -374,7 +654,7 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
 <div class="proj-card reveal d2">
   <div class="proj-img-wrap" data-proj="smartdash">
     <div class="proj-badges"><span class="proj-badge cat">Analytics Dashboard</span></div>
-    <img src="https://github.com/user-attachments/assets/76940d45-e19b-442a-9b4c-82631ae05f33" alt="SmartDashPro Dashboard" loading="lazy"/>
+    <img src="https://github.com/user-attachments/assets/76940d45-e19b-442a-9b4c-82631ae05f33" alt="SmartDashPro Dashboard" loading="lazy" width="720" height="200"/>
     <button class="proj-img-nav prev" onclick="slideProjImg(this,-1)">‹</button>
     <button class="proj-img-nav next" onclick="slideProjImg(this,1)">›</button>
     <div class="proj-img-dots">
@@ -384,9 +664,7 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
   <div class="proj-body">
     <div class="proj-title">SmartDashPro</div>
     <div class="proj-short">Professional analytics dashboard for monitoring business metrics, tracking KPIs, and turning raw data into visual, actionable insights with interactive filtering and drill-downs.</div>
-    <div class="proj-tech">
-      <span>Dashboard Design</span><span>Data Visualization</span><span>KPI Tracking</span><span>Interactive Filters</span><span>Business Intelligence</span>
-    </div>
+    <div class="proj-tech"><span>Dashboard Design</span><span>Data Visualization</span><span>KPI Tracking</span><span>Interactive Filters</span><span>Business Intelligence</span></div>
     <button class="proj-toggle" onclick="toggleProj(this)">See details <span class="chevron">▾</span></button>
     <div class="proj-detail"><div class="proj-detail-inner">
       <p>SmartDashPro is a portfolio-grade analytics dashboard built to demonstrate how I translate raw data into decision-ready visuals. It features multiple views, filterable KPIs, trend analysis, and clean layout principles that mirror what I build professionally.</p>
@@ -406,16 +684,29 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
 
 <!-- Project 3: E-commerce Opinion Mining -->
 <div class="proj-card reveal d3">
-  <div class="proj-no-img">🔍</div>
+  <div class="proj-code-preview">
+    <div class="code-bar">
+      <div class="code-dots"><span style="background:#ff5f56"></span><span style="background:#ffbd2e"></span><span style="background:#27c93f"></span></div>
+      <span class="code-filename">opinion_mining.py</span>
+    </div>
+    <div class="code-body">
+      <div class="code-line"><span class="code-kw">from</span> nltk <span class="code-kw">import</span> <span class="code-val">pos_tag</span>, <span class="code-val">word_tokenize</span></div>
+      <div class="code-line"><span class="code-kw">from</span> sentiwordnet <span class="code-kw">import</span> <span class="code-val">SentiWordNet</span></div>
+      <div class="code-line">&nbsp;</div>
+      <div class="code-line"><span class="code-comment"># Extract features from review</span></div>
+      <div class="code-line">features = <span class="code-fn">pos_tag</span>(tokens)</div>
+      <div class="code-line">score = swn.<span class="code-fn">classify</span>(features)</div>
+      <div class="code-line"><span class="code-comment"># "Great battery life!" → </span><span class="code-out">pos: 0.78 ↑</span></div>
+      <div class="code-line"><span class="code-str">"Poor build quality"</span> → <span class="code-kw" style="color:#ff7b72">neg: 0.82 ↓</span></div>
+    </div>
+  </div>
   <div class="proj-body">
     <div class="proj-title">E-commerce Review Mining System</div>
     <div class="proj-short">NLP-based opinion mining system that analyzes e-commerce reviews to extract product features, classify sentiment using SentiWordNet, and generate comparative product insights.</div>
-    <div class="proj-tech">
-      <span>NLP</span><span>Sentiment Analysis</span><span>SentiWordNet</span><span>POS Tagging</span><span>ASP.NET</span><span>C#</span><span>SQL Server</span><span>Web Scraping</span>
-    </div>
+    <div class="proj-tech"><span>NLP</span><span>Sentiment Analysis</span><span>SentiWordNet</span><span>POS Tagging</span><span>ASP.NET</span><span>C#</span><span>SQL Server</span><span>Web Scraping</span></div>
     <button class="proj-toggle" onclick="toggleProj(this)">See details <span class="chevron">▾</span></button>
     <div class="proj-detail"><div class="proj-detail-inner">
-      <p>This project applies opinion mining and NLP to e-commerce reviews. It extracts product-level insights from customer feedback by preprocessing review text, identifying product features, summarizing opinions, and classifying sentiment — connecting technical NLP work with a real business problem.</p>
+      <p>Applies opinion mining and NLP to e-commerce reviews. Extracts product-level insights from customer feedback by preprocessing review text, identifying product features, summarizing opinions, and classifying sentiment.</p>
       <ul class="proj-features">
         <li>Web scraping for collecting real-time user reviews</li>
         <li>Parts-of-speech tagging and text preprocessing</li>
@@ -435,17 +726,42 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
 </div>
 </div></section>
 <div class="divider"></div>
+
 <section id="skills"><div class="container"><div class="sec-label reveal">Skills & Tools</div><h2 class="sec-title reveal">What I <span class="serif">work with</span></h2><div class="skills-grouped reveal d1"><div class="skill-group"><h3>Analytics & Experimentation</h3><div class="skill-chips"><span class="skill-chip">A/B Testing</span><span class="skill-chip">Multivariate Testing</span><span class="skill-chip">Statistical Sizing</span><span class="skill-chip">Experiment Readouts</span><span class="skill-chip">Funnel Diagnostics</span><span class="skill-chip">Cohort Analysis</span></div></div><div class="skill-group"><h3>Lifecycle & Growth</h3><div class="skill-chips"><span class="skill-chip">AARRR Framework</span><span class="skill-chip">Lifecycle Segmentation</span><span class="skill-chip">LTV Modeling</span><span class="skill-chip">Churn Analysis</span><span class="skill-chip">CRM & Personalization</span><span class="skill-chip">Retention Strategy</span></div></div><div class="skill-group"><h3>Platforms & Tools</h3><div class="skill-chips"><span class="skill-chip">GA4</span><span class="skill-chip">Mixpanel</span><span class="skill-chip">Looker Studio</span><span class="skill-chip">SQL</span><span class="skill-chip">Python</span><span class="skill-chip">Excel / Sheets</span><span class="skill-chip">Tableau</span><span class="skill-chip">HubSpot</span><span class="skill-chip">Marketo</span><span class="skill-chip">Salesforce</span></div></div><div class="skill-group"><h3>Marketing & Attribution</h3><div class="skill-chips"><span class="skill-chip">Multi-Touch Attribution</span><span class="skill-chip">Incrementality Testing</span><span class="skill-chip">Media Mix Modeling</span><span class="skill-chip">GTM Analytics</span><span class="skill-chip">Revenue Modeling</span></div></div></div></div></section>
 <div class="divider"></div>
+
 <section><div class="container"><div class="sec-label reveal">Domains</div><h2 class="sec-title reveal">Industries I've <span class="serif">operated in</span></h2><div class="domain-strip reveal d1"><div class="domain-pill"><span class="domain-dot" style="background:var(--accent2)"></span>Fintech & Payments</div><div class="domain-pill"><span class="domain-dot" style="background:var(--accent)"></span>Healthcare & Healthtech</div><div class="domain-pill"><span class="domain-dot" style="background:var(--accent3)"></span>Management Consulting</div><div class="domain-pill"><span class="domain-dot" style="background:#d97706"></span>Consumer Software</div><div class="domain-pill"><span class="domain-dot" style="background:#dc2626"></span>AI-Driven Products</div></div></div></section>
 <div class="divider"></div>
-<section><div class="container"><div class="sec-label reveal">Testimonials</div><h2 class="sec-title reveal">What people <span class="serif">say</span></h2><div class="testimonial-card reveal d1"><p class="testimonial-text">"Sanal was the person we brought in when the numbers didn't make sense. He has a rare ability to cut through noise, find the real story in the data, and present it in a way that changes the conversation in the room."</p><div class="testimonial-footer"><div class="testimonial-avatar">AD</div><div><div class="testimonial-author">Analytics Director</div><div class="testimonial-role">Avanzar Health</div></div></div></div><div class="testimonial-card reveal d2"><p class="testimonial-text">"His experiment sizing work became the template our entire team used. He didn't just analyze — he built frameworks that outlasted his time here."</p><div class="testimonial-footer"><div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--accent2),var(--accent3))">PL</div><div><div class="testimonial-author">Product Lead</div><div class="testimonial-role">Stripe</div></div></div></div><div class="testimonial-card reveal d3"><p class="testimonial-text">"What sets Sanal apart is that he thinks like a product person but operates like a data person. He doesn't just hand you a dashboard — he tells you what to do with it."</p><div class="testimonial-footer"><div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--accent3),#ec4899)">VP</div><div><div class="testimonial-author">VP of Product</div><div class="testimonial-role">Mety Technology</div></div></div></div></div></section>
+
+<section><div class="container"><div class="sec-label reveal">Testimonials</div><h2 class="sec-title reveal">What people <span class="serif">say</span></h2>
+  <div class="testimonial-card reveal d1"><p class="testimonial-text">"Sanal was the person we brought in when the numbers didn't make sense. He has a rare ability to cut through noise, find the real story in the data, and present it in a way that changes the conversation in the room."</p><div class="testimonial-footer"><div class="testimonial-avatar">AD</div><div><div class="testimonial-author">Analytics Director</div><div class="testimonial-role">Avanzar Health</div></div></div></div>
+  <div class="testimonial-card reveal d2"><p class="testimonial-text">"His experiment sizing work became the template our entire team used. He didn't just analyze — he built frameworks that outlasted his time here."</p><div class="testimonial-footer"><div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--accent2),var(--accent3))">PL</div><div><div class="testimonial-author">Product Lead</div><div class="testimonial-role">Stripe</div></div></div></div>
+  <div class="testimonial-card reveal d3"><p class="testimonial-text">"What sets Sanal apart is that he thinks like a product person but operates like a data person. He doesn't just hand you a dashboard — he tells you what to do with it."</p><div class="testimonial-footer"><div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--accent3),#ec4899)">VP</div><div><div class="testimonial-author">VP of Product</div><div class="testimonial-role">AI Healthtech Startup</div></div></div></div>
+</div></section>
 <div class="divider"></div>
+
 <section><div class="container"><div class="sec-label reveal">Education</div><h2 class="sec-title reveal">Academic <span class="serif">background</span></h2><div class="reveal d1"><div class="edu-item"><div class="edu-school">Northeastern University</div><div class="edu-degree">M.S., Information Systems</div><div class="edu-date">2023 – 2025 · Boston, MA</div></div><div class="edu-item"><div class="edu-school">University of Mumbai</div><div class="edu-degree">M.B.A., Marketing & Operations</div><div class="edu-date">2018 – 2020 · Mumbai</div></div><div class="edu-item"><div class="edu-school">University of Mumbai</div><div class="edu-degree">B.E., Computer Science</div><div class="edu-date">2014 – 2018 · Mumbai</div></div></div></div></section>
 <section style="padding-top:0"><div class="container"><div class="sec-label reveal">Certifications</div><div class="cert-wrap reveal d1"><span class="cert-badge">CSPO</span><span class="cert-badge">Google Analytics 4</span><span class="cert-badge">HubSpot Marketing</span><span class="cert-badge">Salesforce Marketing Cloud</span><span class="cert-badge">Marketo Expert</span><span class="cert-badge">Meta Digital Marketing</span><span class="cert-badge">SEMrush SEO</span><span class="cert-badge">Mixpanel Analytics</span></div></div></section>
 <div class="divider"></div>
+
 <section><div class="container"><div class="sec-label reveal">Exploring</div><h2 class="sec-title reveal">What I'm <span class="serif">thinking about</span></h2><div class="reveal d1"><div class="interest-item"><div class="interest-icon" style="background:rgba(5,150,105,.07)">🔬</div>Causal inference in marketing and product analytics</div><div class="interest-item"><div class="interest-icon" style="background:rgba(8,145,178,.07)">🧪</div>Experimentation culture in large financial institutions</div><div class="interest-item"><div class="interest-icon" style="background:rgba(124,58,237,.07)">🤖</div>LLM-assisted analytics workflows</div><div class="interest-item"><div class="interest-icon" style="background:rgba(217,119,6,.07)">🔍</div>Generative Engine Optimization and AI search's impact on growth</div></div></div></section>
-<section class="contact-section" id="contact"><div class="container"><div class="sec-label reveal">Let's Connect</div><h2 class="sec-title reveal" style="text-align:center">Start a <span class="serif">conversation</span></h2><p class="sec-sub reveal" style="text-align:center;margin:0 auto 6px;max-width:380px">Open to senior analyst, growth analytics, and product analytics roles.</p><div class="contact-links reveal d1"><a href="mailto:sanal.pillai97@gmail.com" class="contact-link"><span class="label">Email</span><span class="value">sanal.pillai97@gmail.com</span></a><a href="tel:+12027431120" class="contact-link"><span class="label">Phone</span><span class="value">(202) 743-1120</span></a><a href="https://www.linkedin.com/in/sanalpillai97/" target="_blank" class="contact-link"><span class="label">LinkedIn</span><span class="value">sanalpillai97</span></a><a href="javascript:void(0)" onclick="openModal()" class="contact-link"><span class="label">Resume</span><span class="value">Request PDF</span></a></div></div></section>
+
+<section class="contact-section" id="contact"><div class="container">
+  <div class="sec-label reveal">Let's Connect</div>
+  <h2 class="sec-title reveal" style="text-align:center">Start a <span class="serif">conversation</span></h2>
+  <p class="sec-sub reveal" style="text-align:center;margin:0 auto 6px;max-width:380px">Open to senior analyst, growth analytics, and product analytics roles.</p>
+  <div class="contact-links reveal d1">
+    <div class="contact-link" style="cursor:pointer" onclick="copyEmail()">
+      <span class="label">Email</span>
+      <span class="value">sanal.pillai97@gmail.com</span>
+      <button class="copy-btn" onclick="copyEmail(event)" title="Copy email" aria-label="Copy email">⎘</button>
+    </div>
+    <a href="tel:+12027431120" class="contact-link"><span class="label">Phone</span><span class="value">(202) 743-1120</span></a>
+    <a href="https://www.linkedin.com/in/sanalpillai97/" target="_blank" class="contact-link"><span class="label">LinkedIn</span><span class="value">sanalpillai97</span></a>
+    <a href="javascript:void(0)" onclick="openModal()" class="contact-link"><span class="label">Resume</span><span class="value">Request PDF</span></a>
+  </div>
+</div></section>
+
 <!-- Resume Modal -->
 <div class="modal-overlay" id="resumeModal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
@@ -454,18 +770,9 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
       <h3>Request Resume</h3>
       <p>Drop your details below and I'll send my resume directly to your inbox.</p>
       <form id="resumeForm" onsubmit="return handleSubmit(event)">
-        <div class="form-group">
-          <label>Name *</label>
-          <input type="text" name="name" placeholder="Your full name" required/>
-        </div>
-        <div class="form-group">
-          <label>Email *</label>
-          <input type="email" name="email" placeholder="you@company.com" required/>
-        </div>
-        <div class="form-group">
-          <label>Message *</label>
-          <textarea name="message" rows="3" placeholder="What role or opportunity is this for?" required></textarea>
-        </div>
+        <div class="form-group"><label>Name *</label><input type="text" name="name" placeholder="Your full name" required/></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="you@company.com" required/></div>
+        <div class="form-group"><label>Message *</label><textarea name="message" rows="3" placeholder="What role or opportunity is this for?" required></textarea></div>
         <button type="submit" class="form-submit" id="submitBtn">Request Resume →</button>
       </form>
     </div>
@@ -478,59 +785,118 @@ footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}foote
     </div>
   </div>
 </div>
-<footer><div class="container"><span>© 2026 Sanal Pillai</span></div></footer>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-wit">Built in vanilla HTML — because frameworks are a hypothesis.</span>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#experience">Work</a>
+        <a href="#cases">Cases</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <span class="footer-copy mono">© 2026 Sanal Pillai</span>
+    </div>
+  </div>
+</footer>
+
 <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-/* Scroll progress */
-var prog=document.getElementById('scroll-progress');
-/* Nav + scroll-top */
-var navEl=document.getElementById('nav'),stBtn=document.getElementById('scroll-top');
-var secs=document.querySelectorAll('section[id]'),navAs=document.querySelectorAll('.nav-links a');
-function onScroll(){
-  var h=document.documentElement;
-  prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
-  navEl.classList.toggle('scrolled',window.scrollY>40);
-  stBtn.classList.toggle('show',window.scrollY>400);
-  var cur='';
-  secs.forEach(function(s){if(window.scrollY>=s.offsetTop-180)cur=s.id});
-  navAs.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
+/* ═══ THEME ═══ */
+(function(){
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  // Set toggle icon after DOM loads
+  document.addEventListener('DOMContentLoaded', function(){
+    const btn = document.getElementById('darkToggle');
+    if(btn) btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+  });
+})();
+
+function toggleDark(){
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.classList.add('theme-transitioning');
+  setTimeout(() => html.classList.remove('theme-transitioning'), 350);
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  const btn = document.getElementById('darkToggle');
+  if(btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
 }
-window.addEventListener('scroll',onScroll,{passive:true});
+
+/* ═══ LIVE CLOCK (ET) ═══ */
+function updateClock(){
+  const el = document.getElementById('liveTime');
+  if(!el) return;
+  const t = new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',hour12:true}).format(new Date());
+  el.textContent = t + ' ET';
+}
+updateClock();
+setInterval(updateClock, 30000);
+
+/* ═══ SCROLL PROGRESS + NAV ═══ */
+const prog = document.getElementById('scroll-progress');
+const navEl = document.getElementById('nav');
+const stBtn = document.getElementById('scroll-top');
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+
+function onScroll(){
+  const h = document.documentElement;
+  prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  navEl.classList.toggle('scrolled', window.scrollY > 40);
+  stBtn.classList.toggle('show', window.scrollY > 400);
+  let cur = '';
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 180) cur = s.id; });
+  navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+}
+window.addEventListener('scroll', onScroll, {passive: true});
 onScroll();
 
-/* Mouse spotlight */
-var spot=document.getElementById('spotlight');
-var mx=-999,my=-999;
-document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
-document.addEventListener('mouseleave',function(){spot.style.opacity='0'});
-document.addEventListener('mouseenter',function(){spot.style.opacity='1'});
-(function as(){spot.style.left=mx+'px';spot.style.top=my+'px';requestAnimationFrame(as)})();
+/* ═══ MOUSE SPOTLIGHT ═══ */
+const spot = document.getElementById('spotlight');
+let mx = -999, my = -999, spotReady = false;
+document.addEventListener('mousemove', function(e){
+  mx = e.clientX; my = e.clientY;
+  if(!spotReady){ spot.style.opacity = '1'; spotReady = true; }
+});
+document.addEventListener('mouseleave', () => spot.style.opacity = '0');
+(function moveSpot(){ spot.style.left = mx + 'px'; spot.style.top = my + 'px'; requestAnimationFrame(moveSpot); })();
 
-/* Reveal */
-var rObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.06,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal,.blur-in').forEach(function(el){rObs.observe(el)});
+/* ═══ REVEAL ON SCROLL ═══ */
+const rObs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.06, rootMargin: '0px 0px -30px 0px'});
+document.querySelectorAll('.reveal, .blur-in').forEach(el => rObs.observe(el));
 
-/* Typewriter */
-var phrases=['Growth & Product Analytics Leader.','Senior Business Analyst.','Funnel Diagnostics Specialist.','Experimentation Strategist.','Data-Driven Decision Maker.'];
-var pi=0,ci=0,isDel=false;
-var tEl=document.getElementById('typewriter');
+/* ═══ TYPEWRITER ═══ */
+const phrases = ['Growth & Product Analytics Leader.','Senior Business Analyst.','Funnel Diagnostics Specialist.','Experimentation Strategist.','Data-Driven Decision Maker.'];
+let pi = 0, ci = 0, isDel = false;
+const tEl = document.getElementById('typewriter');
 function tw(){
-  var p=phrases[pi];
-  if(!isDel){tEl.textContent=p.substring(0,ci+1);ci++;if(ci===p.length){isDel=true;setTimeout(tw,2000);return}setTimeout(tw,50+Math.random()*25)}
-  else{tEl.textContent=p.substring(0,ci-1);ci--;if(ci===0){isDel=false;pi=(pi+1)%phrases.length;setTimeout(tw,300);return}setTimeout(tw,22)}
+  const p = phrases[pi];
+  if(!isDel){ tEl.textContent = p.substring(0, ci + 1); ci++; if(ci === p.length){ isDel = true; setTimeout(tw, 2000); return; } setTimeout(tw, 50 + Math.random() * 25); }
+  else { tEl.textContent = p.substring(0, ci - 1); ci--; if(ci === 0){ isDel = false; pi = (pi + 1) % phrases.length; setTimeout(tw, 300); return; } setTimeout(tw, 22); }
 }
-setTimeout(tw,600);
+setTimeout(tw, 600);
 
-/* Case toggle */
-function toggleCase(c){var o=c.classList.contains('open');document.querySelectorAll('.case-card.open').forEach(function(x){x.classList.remove('open')});if(!o)c.classList.add('open')}
+/* ═══ CASE TOGGLE ═══ */
+function toggleCase(c){
+  const wasOpen = c.classList.contains('open');
+  document.querySelectorAll('.case-card.open').forEach(x => x.classList.remove('open'));
+  if(!wasOpen) c.classList.add('open');
+}
 
-/* Project toggle */
-function toggleProj(btn){var card=btn.closest('.proj-card');card.classList.toggle('expanded')}
+/* ═══ PROJECT TOGGLE ═══ */
+function toggleProj(btn){ btn.closest('.proj-card').classList.toggle('expanded'); }
 
-/* Project image carousel */
-var projImages={
-  smartdash:[
+/* ═══ PROJECT IMAGE CAROUSEL ═══ */
+const projImages = {
+  smartdash: [
     'https://github.com/user-attachments/assets/76940d45-e19b-442a-9b4c-82631ae05f33',
     'https://github.com/user-attachments/assets/39f00823-bbe0-435c-8929-2812708ed8fe',
     'https://github.com/user-attachments/assets/f8fd71c5-a8de-4529-9aa1-b5af9d4dae11',
@@ -539,107 +905,240 @@ var projImages={
     'https://github.com/user-attachments/assets/b5db59c8-2d53-4fd2-9fbb-4da867ad6473'
   ]
 };
-var projIdx={smartdash:0};
-function slideProjImg(btn,dir){
-  var wrap=btn.closest('.proj-img-wrap');
-  var key=wrap.dataset.proj;
-  var imgs=projImages[key];
-  if(!imgs)return;
-  var idx=projIdx[key]||0;
-  idx=(idx+dir+imgs.length)%imgs.length;
-  projIdx[key]=idx;
-  wrap.querySelector('img').src=imgs[idx];
-  var dots=wrap.querySelectorAll('.proj-img-dot');
-  dots.forEach(function(d,i){d.classList.toggle('active',i===idx)});
+const projIdx = {smartdash: 0};
+function slideProjImg(btn, dir){
+  const wrap = btn.closest('.proj-img-wrap');
+  const key = wrap.dataset.proj;
+  const imgs = projImages[key];
+  if(!imgs) return;
+  let idx = (projIdx[key] + dir + imgs.length) % imgs.length;
+  projIdx[key] = idx;
+  wrap.querySelector('img').src = imgs[idx];
+  wrap.querySelectorAll('.proj-img-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
 }
 
-/* Magnetic buttons */
-document.querySelectorAll('.btn').forEach(function(b){
-  b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.1+'px,'+(e.clientY-r.top-r.height/2)*.1+'px)'});
-  b.addEventListener('mouseleave',function(){b.style.transform=''});
+/* ═══ MAGNETIC BUTTONS ═══ */
+document.querySelectorAll('.btn').forEach(b => {
+  b.addEventListener('mousemove', e => {
+    const r = b.getBoundingClientRect();
+    b.style.transform = `translate(${(e.clientX - r.left - r.width/2) * .1}px,${(e.clientY - r.top - r.height/2) * .1}px)`;
+  });
+  b.addEventListener('mouseleave', () => b.style.transform = '');
 });
 
-/* Resume Modal */
-function openModal(){document.getElementById('resumeModal').classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('resumeModal').classList.remove('active');document.body.style.overflow='';
-  /* Reset to form view after closing */
-  setTimeout(function(){
-    document.getElementById('formView').style.display='block';
-    document.getElementById('successView').style.display='none';
-    document.getElementById('submitBtn').disabled=false;
-    document.getElementById('submitBtn').textContent='Request Resume →';
-  },300);
+/* ═══ COPY EMAIL ═══ */
+function copyEmail(e){
+  if(e){ e.preventDefault(); e.stopPropagation(); }
+  navigator.clipboard.writeText('sanal.pillai97@gmail.com').then(() => showToast('Email copied to clipboard ✓')).catch(() => showToast('sanal.pillai97@gmail.com'));
 }
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+/* ═══ RESUME MODAL ═══ */
+function openModal(){ document.getElementById('resumeModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal(){
+  document.getElementById('resumeModal').classList.remove('active');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    document.getElementById('formView').style.display = 'block';
+    document.getElementById('successView').style.display = 'none';
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = false;
+    btn.textContent = 'Request Resume →';
+  }, 300);
+}
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    closeModal();
+    closePalette();
+  }
+  if((e.metaKey || e.ctrlKey) && e.key === 'k'){
+    e.preventDefault();
+    document.getElementById('palette').classList.contains('active') ? closePalette() : openPalette();
+  }
+});
 
 function handleSubmit(e){
   e.preventDefault();
-  var form=document.getElementById('resumeForm');
-  var btn=document.getElementById('submitBtn');
-  btn.disabled=true;
-  btn.textContent='Sending...';
-
-  /*
-   * Uses formsubmit.co — free, no signup needed.
-   *
-   * HOW IT WORKS:
-   * 1. First time someone submits, formsubmit.co sends a
-   *    verification email to sanal.pillai97@gmail.com
-   * 2. Click the verify link in that email (one-time only)
-   * 3. After that, every form submission lands in your inbox
-   *
-   * The email you receive will contain:
-   *   - Name, Email, Message from the person
-   *   - Subject line: "Resume Request from [name]"
-   */
-  var data=new FormData(form);
-  data.append('_subject','Resume Request from '+form.name.value);
-  data.append('_captcha','false');
-  data.append('_template','table');
-
-  fetch('https://formsubmit.co/ajax/sanal.pillai97@gmail.com',{
-    method:'POST',
-    body:data
-  }).then(function(r){
-    if(r.ok){
-      document.getElementById('formView').style.display='none';
-      document.getElementById('successView').style.display='block';
-      form.reset();
-    }else{
-      alert('Something went wrong. Please email me directly at sanal.pillai97@gmail.com');
-      btn.disabled=false;
-      btn.textContent='Request Resume →';
-    }
-  }).catch(function(){
-    alert('Network error. Please email me directly at sanal.pillai97@gmail.com');
-    btn.disabled=false;
-    btn.textContent='Request Resume →';
-  });
-
+  const form = document.getElementById('resumeForm');
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+  const data = new FormData(form);
+  data.append('_subject', 'Resume Request from ' + form.name.value);
+  data.append('_captcha', 'false');
+  data.append('_template', 'table');
+  fetch('https://formsubmit.co/ajax/sanal.pillai97@gmail.com', {method:'POST',body:data})
+    .then(r => {
+      if(r.ok){ document.getElementById('formView').style.display='none'; document.getElementById('successView').style.display='block'; form.reset(); }
+      else { alert('Something went wrong. Please email me directly at sanal.pillai97@gmail.com'); btn.disabled=false; btn.textContent='Request Resume →'; }
+    }).catch(() => { alert('Network error. Please email me directly at sanal.pillai97@gmail.com'); btn.disabled=false; btn.textContent='Request Resume →'; });
   return false;
 }
 
-/* Particles */
-var cv=document.getElementById('particles'),cx=cv.getContext('2d');
-var w,h,pts=[];
-function rsz(){w=cv.width=innerWidth;h=cv.height=innerHeight}
-rsz();window.addEventListener('resize',rsz);
-var PC=Math.min(35,Math.floor(innerWidth/30));
-for(var i=0;i<PC;i++)pts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*.8+.4});
+/* ═══ MOBILE NAV ═══ */
+function toggleMobileNav(){
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  const isOpen = nav.classList.contains('open');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+function closeMobileNav(){
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ═══ COMMAND PALETTE ═══ */
+const paletteCommands = [
+  {group:'Navigate', icon:'👤', label:'About', desc:'Background & story', action:()=>{closePalette();scrollToSection('#about')}},
+  {group:'Navigate', icon:'💼', label:'Experience', desc:'Work history', action:()=>{closePalette();scrollToSection('#experience')}},
+  {group:'Navigate', icon:'📊', label:'Case Studies', desc:'Selected work', action:()=>{closePalette();scrollToSection('#cases')}},
+  {group:'Navigate', icon:'🚀', label:'Projects', desc:'Things I\'ve built', action:()=>{closePalette();scrollToSection('#projects')}},
+  {group:'Navigate', icon:'🛠', label:'Skills & Tools', desc:'What I work with', action:()=>{closePalette();scrollToSection('#skills')}},
+  {group:'Navigate', icon:'✉️', label:'Contact', desc:'Get in touch', action:()=>{closePalette();scrollToSection('#contact')}},
+  {group:'Actions', icon:'📋', label:'Copy Email', desc:'sanal.pillai97@gmail.com', action:()=>{closePalette();copyEmail()}},
+  {group:'Actions', icon:'📄', label:'Request Resume', desc:'Get the PDF', action:()=>{closePalette();openModal()}},
+  {group:'Actions', icon:'🔗', label:'LinkedIn', desc:'View profile', action:()=>{closePalette();window.open('https://www.linkedin.com/in/sanalpillai97/','_blank')}},
+  {group:'Settings', icon:'🌙', label:'Toggle Dark Mode', desc:'Switch theme', action:()=>{closePalette();toggleDark()}},
+];
+
+let palSel = 0;
+let palFiltered = [...paletteCommands];
+
+function scrollToSection(hash){
+  const el = document.querySelector(hash);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+
+function openPalette(){
+  const overlay = document.getElementById('palette');
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  palSel = 0;
+  palFiltered = [...paletteCommands];
+  renderPalette('');
+  setTimeout(() => document.getElementById('paletteInput').focus(), 50);
+}
+
+function closePalette(){
+  document.getElementById('palette').classList.remove('active');
+  document.getElementById('paletteInput').value = '';
+  document.body.style.overflow = '';
+}
+
+function renderPalette(query){
+  const q = query.toLowerCase().trim();
+  palFiltered = q ? paletteCommands.filter(c =>
+    c.label.toLowerCase().includes(q) ||
+    c.desc.toLowerCase().includes(q) ||
+    c.group.toLowerCase().includes(q)
+  ) : [...paletteCommands];
+  if(palSel >= palFiltered.length) palSel = 0;
+
+  const res = document.getElementById('paletteResults');
+  if(!palFiltered.length){ res.innerHTML = '<div style="padding:24px;text-align:center;font-size:.78rem;color:var(--dim)">No results</div>'; return; }
+
+  let html = '';
+  let lastGroup = '';
+  palFiltered.forEach((cmd, i) => {
+    if(cmd.group !== lastGroup){
+      html += `<div class="palette-group-label">${cmd.group}</div>`;
+      lastGroup = cmd.group;
+    }
+    html += `<div class="palette-item${i === palSel ? ' selected' : ''}" data-idx="${i}" onclick="paletteSelect(${i})">
+      <div class="palette-item-icon">${cmd.icon}</div>
+      <div><div class="palette-item-label">${cmd.label}</div><div class="palette-item-desc">${cmd.desc}</div></div>
+    </div>`;
+  });
+  res.innerHTML = html;
+}
+
+function paletteSelect(idx){
+  if(palFiltered[idx]) palFiltered[idx].action();
+}
+
+document.getElementById('paletteInput').addEventListener('input', function(){
+  palSel = 0;
+  renderPalette(this.value);
+});
+document.getElementById('paletteInput').addEventListener('keydown', function(e){
+  if(e.key === 'ArrowDown'){ e.preventDefault(); palSel = Math.min(palSel + 1, palFiltered.length - 1); renderPalette(this.value); scrollPaletteItem(); }
+  else if(e.key === 'ArrowUp'){ e.preventDefault(); palSel = Math.max(palSel - 1, 0); renderPalette(this.value); scrollPaletteItem(); }
+  else if(e.key === 'Enter'){ e.preventDefault(); paletteSelect(palSel); }
+});
+function scrollPaletteItem(){
+  const res = document.getElementById('paletteResults');
+  const sel = res.querySelector('.selected');
+  if(sel) sel.scrollIntoView({block:'nearest'});
+}
+
+/* ═══ COUNT-UP ANIMATION ═══ */
+function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+function countUp(el, target, prefix, suffix, isDecimal, duration){
+  const start = performance.now();
+  function step(now){
+    const progress = Math.min((now - start) / duration, 1);
+    const value = easeOut(progress) * target;
+    el.textContent = prefix + (isDecimal ? value.toFixed(1) : Math.floor(value)) + suffix;
+    if(progress < 1) requestAnimationFrame(step);
+    else el.textContent = prefix + target + suffix;
+  }
+  requestAnimationFrame(step);
+}
+
+let countupDone = false;
+const marqueeObs = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting && !countupDone){
+    countupDone = true;
+    document.querySelectorAll('.marquee-val[data-count-val]').forEach(el => {
+      const val = parseFloat(el.dataset.countVal);
+      const prefix = el.dataset.countPrefix || '';
+      const suffix = el.dataset.countSuffix || '';
+      const isDecimal = el.dataset.countVal.includes('.');
+      countUp(el, val, prefix, suffix, isDecimal, 1400);
+    });
+  }
+}, {threshold: 0.5});
+marqueeObs.observe(document.querySelector('.marquee-section'));
+
+/* ═══ PARTICLES ═══ */
+const cv = document.getElementById('particles');
+const cx = cv.getContext('2d');
+let w, h, pts = [], animRunning = true;
+function rsz(){ w = cv.width = innerWidth; h = cv.height = innerHeight; }
+rsz();
+window.addEventListener('resize', rsz);
+const PC = Math.min(35, Math.floor(innerWidth / 30));
+for(let i = 0; i < PC; i++) pts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*.8+.4});
 function draw(){
-  cx.clearRect(0,0,w,h);
-  for(var i=0;i<pts.length;i++){
-    var p=pts[i];p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
-    var dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);
-    if(d<100){var f=(100-d)/100*.4;p.x+=(dx/d)*f;p.y+=(dy/d)*f}
-    cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle='rgba(5,150,105,.15)';cx.fill();
-    for(var j=i+1;j<pts.length;j++){var q=pts[j],dd=Math.hypot(p.x-q.x,p.y-q.y);
-      if(dd<110){cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.strokeStyle='rgba(5,150,105,'+(0.025*(1-dd/110))+')';cx.lineWidth=.5;cx.stroke()}}
+  if(!animRunning){ requestAnimationFrame(draw); return; }
+  cx.clearRect(0, 0, w, h);
+  for(let i = 0; i < pts.length; i++){
+    const p = pts[i];
+    p.x += p.vx; p.y += p.vy;
+    if(p.x < 0) p.x = w; if(p.x > w) p.x = 0;
+    if(p.y < 0) p.y = h; if(p.y > h) p.y = 0;
+    const dx = p.x - mx, dy = p.y - my, d = Math.sqrt(dx*dx + dy*dy);
+    if(d < 100){ const f = (100-d)/100*.4; p.x += (dx/d)*f; p.y += (dy/d)*f; }
+    cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    cx.fillStyle = 'rgba(5,150,105,.15)'; cx.fill();
+    for(let j = i+1; j < pts.length; j++){
+      const q = pts[j], dd = Math.hypot(p.x-q.x, p.y-q.y);
+      if(dd < 110){ cx.beginPath(); cx.moveTo(p.x,p.y); cx.lineTo(q.x,q.y); cx.strokeStyle=`rgba(5,150,105,${0.025*(1-dd/110)})`; cx.lineWidth=.5; cx.stroke(); }
+    }
   }
   requestAnimationFrame(draw);
 }
 draw();
+
+/* Pause particles on hidden tab */
+document.addEventListener('visibilitychange', () => { animRunning = !document.hidden; });
 </script>
 </body>
 </html>
