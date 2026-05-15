@@ -109,11 +109,11 @@ nav.scrolled{background:rgba(8,8,7,.92);backdrop-filter:blur(20px) saturate(1.5)
 
 /* ═══ LAYOUT ═══ */
 .container{max-width:var(--col);margin:0 auto;padding:0 24px;position:relative;z-index:2}
-section{padding:64px 0}
-@media(max-width:640px){section{padding:44px 0}.container{padding:0 16px}}
+section{padding:52px 0}
+@media(max-width:640px){section{padding:36px 0}.container{padding:0 16px}}
 
 /* ═══ HERO ═══ */
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:70px;position:relative;overflow:hidden}
+.hero{padding:clamp(100px,15vh,136px) 0 clamp(56px,8vh,76px);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black,transparent)}
 [data-theme="light"] .hero::before{background-image:radial-gradient(circle,rgba(0,0,0,.06) 1px,transparent 1px)}
 .hero-blob{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;opacity:.7}
@@ -129,7 +129,7 @@ section{padding:64px 0}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(5,150,105,.35)}50%{box-shadow:0 0 0 8px rgba(5,150,105,0)}}
 .live-time{font-family:'JetBrains Mono',monospace;font-size:.65rem;opacity:.7}
 
-.hero h1{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:300;line-height:1.12;letter-spacing:-.04em;margin-bottom:8px}
+.hero h1{font-size:clamp(2.6rem,5.5vw,4.2rem);font-weight:300;line-height:1.08;letter-spacing:-.04em;margin-bottom:8px}
 .hero h1 strong{font-weight:700}
 .hero h1 .name-hl{position:relative;display:inline-block}
 .hero h1 .name-hl::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.22,1,.36,1)}
@@ -138,10 +138,10 @@ section{padding:64px 0}
 /* ═══ TYPEWRITER ═══ */
 /* Separate block below h1 — never inside the h1, so h1 height is always stable */
 .typewriter-block{
-  font-size:clamp(1.15rem,2.4vw,1.6rem);
+  font-size:clamp(1.2rem,2.6vw,1.75rem);
   font-weight:500;
   /* Always reserves 2 lines of height so layout never jumps */
-  min-height:calc(1.6rem * 1.3 * 2);
+  min-height:calc(1.75rem * 1.3 * 2);
   line-height:1.3;
   margin-bottom:4px;
   display:flex;align-items:flex-start;flex-wrap:wrap;gap:0.3em;
@@ -163,36 +163,9 @@ section{padding:64px 0}
 .tag{padding:4px 10px;font-size:.62rem;font-family:'JetBrains Mono',monospace;color:var(--dim);border:1px solid var(--border);border-radius:6px;transition:color .2s,border-color .2s}
 .tag:hover{color:var(--accent);border-color:rgba(5,150,105,.25)}
 
-/* ═══ HERO GRID ═══ */
-/* Hero gets its own wider container so the two-column layout breathes */
-.hero .container{max-width:min(calc(100vw - 32px),900px);padding:0 32px}
-.hero-grid{display:grid;grid-template-columns:1fr 310px;gap:44px;align-items:center;width:100%}
-.hero-left{display:flex;flex-direction:column}
-.hero-right{display:flex;justify-content:center;align-items:center}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:36px}.hero-right{display:none}}
-
-/* ═══ DATA FIELD CANVAS ═══ */
-.data-field-wrap{
-  width:100%;position:relative;
-  border-radius:20px;overflow:hidden;
-  background:rgba(10,9,8,.72);
-  border:1px solid rgba(255,255,255,.07);
-  box-shadow:0 28px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);
-  /* aspect ratio keeps height proportional to column width */
-  aspect-ratio:1/1.15;
-}
-#dataField{width:100%;height:100%;display:block;cursor:none}
-.df-hint{
-  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
-  font-size:.48rem;font-family:'JetBrains Mono',monospace;
-  color:rgba(90,82,72,.45);letter-spacing:.12em;text-transform:uppercase;
-  white-space:nowrap;pointer-events:none;
-  transition:opacity .4s;
-}
-.data-field-wrap:hover .df-hint{opacity:0}
 
 /* ═══ BENTO STATS ═══ */
-.bento-section{padding:48px 0 56px;position:relative;z-index:2;border-top:1px solid var(--border)}
+.bento-section{padding:36px 0 44px;position:relative;z-index:2;border-top:1px solid var(--border)}
 .bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media(max-width:640px){.bento-grid{grid-template-columns:repeat(2,1fr);gap:8px}}
 @media(max-width:360px){.bento-grid{grid-template-columns:1fr}}
@@ -588,26 +561,16 @@ footer{border-top:1px solid var(--border);padding:28px 0}
 <div class="hero-blob hero-blob-1"></div>
 <div class="hero-blob hero-blob-2"></div>
 <div class="container">
-  <div class="hero-grid">
-    <div class="hero-left">
-      <a href="#contact" class="hero-badge blur-in" style="text-decoration:none">
-        <span class="dot"></span>
-        Open to opportunities&thinsp;·&thinsp;<span class="live-time" id="liveTime"></span>
-      </a>
-      <h1 class="blur-in d1">I'm <strong><span class="name-hl">Sanal Pillai</span></strong></h1>
-      <div class="typewriter-block blur-in d1"><span class="typewriter-prefix">a</span><span id="typewriter"></span><span class="cursor-blink"></span></div>
-      <p class="hero-desc blur-in d2"><strong>6+ years</strong> driving acquisition, activation, lifecycle optimization, experimentation, and monetization strategy across <strong>fintech, healthtech, consulting</strong>, and <strong>consumer products</strong>.</p>
-      <p class="hero-meta blur-in d3">BCG · Stripe · Avanzar Health</p>
-      <div class="hero-btns blur-in d3"><a href="#cases" class="btn btn-primary">View Case Studies <span class="arrow arrow-down">↓</span></a><a href="javascript:void(0)" onclick="openModal()" class="btn btn-ghost">Request Resume <span class="arrow">→</span></a></div>
-      <div class="hero-tags blur-in d4"><span class="tag">Growth Analytics</span><span class="tag">Experimentation</span><span class="tag">Funnel Optimization</span><span class="tag">Lifecycle & Retention</span><span class="tag">Attribution Modeling</span><span class="tag">Revenue Analytics</span></div>
-    </div>
-    <div class="hero-right blur-in d2">
-      <div class="data-field-wrap">
-        <canvas id="dataField"></canvas>
-        <div class="df-hint">move cursor — sphere follows</div>
-      </div>
-    </div>
-  </div>
+  <a href="#contact" class="hero-badge blur-in" style="text-decoration:none">
+    <span class="dot"></span>
+    Open to opportunities&thinsp;·&thinsp;<span class="live-time" id="liveTime"></span>
+  </a>
+  <h1 class="blur-in d1">I'm <strong><span class="name-hl">Sanal Pillai</span></strong></h1>
+  <div class="typewriter-block blur-in d1"><span class="typewriter-prefix">a</span><span id="typewriter"></span><span class="cursor-blink"></span></div>
+  <p class="hero-desc blur-in d2"><strong>6+ years</strong> driving acquisition, activation, lifecycle optimization, experimentation, and monetization strategy across <strong>fintech, healthtech, consulting</strong>, and <strong>consumer products</strong>.</p>
+  <p class="hero-meta blur-in d3">BCG · Stripe · Avanzar Health</p>
+  <div class="hero-btns blur-in d3"><a href="#cases" class="btn btn-primary">View Case Studies <span class="arrow arrow-down">↓</span></a><a href="javascript:void(0)" onclick="openModal()" class="btn btn-ghost">Request Resume <span class="arrow">→</span></a></div>
+  <div class="hero-tags blur-in d4"><span class="tag">Growth Analytics</span><span class="tag">Experimentation</span><span class="tag">Funnel Optimization</span><span class="tag">Lifecycle & Retention</span><span class="tag">Attribution Modeling</span><span class="tag">Revenue Analytics</span></div>
 </div>
 </section>
 
@@ -1032,163 +995,8 @@ function updateClock(){
 updateClock();
 setInterval(updateClock, 30000);
 
-/* ═══ GLOBAL MOUSE COORDS (used by data field + spotlight + magnetic) ═══ */
+/* ═══ GLOBAL MOUSE COORDS (used by spotlight + magnetic buttons) ═══ */
 let mx = -999, my = -999;
-
-/* ═══ DATA FIELD — dot sphere / cursor gaze ═══ */
-(function(){
-  const canvas = document.getElementById('dataField');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  let W, H, dpr, rect, resizeTimer;
-
-  function resize(){
-    rect = canvas.getBoundingClientRect();
-    dpr  = Math.min(devicePixelRatio || 1, 2);
-    W = rect.width; H = rect.height;
-    canvas.width  = Math.round(W * dpr);
-    canvas.height = Math.round(H * dpr);
-    ctx.scale(dpr, dpr);
-  }
-  resize();
-  window.addEventListener('resize', ()=>{
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(resize, 160);
-  }, {passive:true});
-
-  /* ── Fibonacci sphere: 180 uniformly-spaced dots ── */
-  const N   = 180;
-  const PHI = Math.PI * (3 - Math.sqrt(5)); /* golden angle */
-  const COLS = ['#10b981','#10b981','#10b981','#06b6d4','#06b6d4','#8b5cf6'];
-
-  const pts = Array.from({length: N}, (_, i) => {
-    const yn = 1 - (i / (N - 1)) * 2;
-    const r  = Math.sqrt(Math.max(0, 1 - yn * yn));
-    const th = PHI * i;
-    return {
-      ox: r * Math.cos(th), oy: yn, oz: r * Math.sin(th), /* origin on unit sphere */
-      x:  r * Math.cos(th), y:  yn, z:  r * Math.sin(th), /* current (unit space)  */
-      vx: 0, vy: 0, vz: 0,
-      col: COLS[i % COLS.length],
-      sz: 0.55 + Math.random() * 0.9,
-    };
-  });
-
-  /* ── Rotation helpers ── */
-  function ry(x, y, z, a){ const c=Math.cos(a),s=Math.sin(a); return [x*c+z*s, y, -x*s+z*c]; }
-  function rx(x, y, z, a){ const c=Math.cos(a),s=Math.sin(a); return [x, y*c-z*s, y*s+z*c]; }
-
-  let autoY = 0, gt = 0;
-  let gazeX = 0.28, gazeY = 0;   /* smoothly lerped rotation offsets */
-
-  function frame(){
-    gt    += 0.007;
-    autoY += 0.0032; /* slow auto-spin */
-
-    rect = canvas.getBoundingClientRect();
-    const lmx    = mx - rect.left;
-    const lmy    = my - rect.top;
-    const inside = lmx >= 0 && lmx <= W && lmy >= 0 && lmy <= H;
-
-    /* Gaze: sphere watches cursor anywhere on the page */
-    const hasMouse = mx > -900;
-    const canvasCX = rect.left + W * 0.5;
-    const canvasCY = rect.top  + H * 0.5;
-    /* direction from canvas centre → cursor, normalised by half-viewport */
-    const gnmx = hasMouse ? Math.max(-1, Math.min(1, (mx - canvasCX) / (innerWidth  * 0.5))) : 0;
-    const gnmy = hasMouse ? Math.max(-1, Math.min(1, (my - canvasCY) / (innerHeight * 0.5))) : 0;
-    gazeX += (0.28 + gnmy * 0.55 - gazeX) * 0.045;
-    gazeY += (gnmx  * 0.40       - gazeY) * 0.045;
-
-    /* Breathing pulse (±1.8 % radius) */
-    const pulse = 1 + Math.sin(gt * 1.05) * 0.018;
-
-    ctx.clearRect(0, 0, W, H);
-
-    const sR  = Math.min(W, H) * 0.35;  /* sphere radius px */
-    const CX  = W * 0.5, CY = H * 0.5;
-    const FOV = 400;
-
-    const draw = [];
-
-    pts.forEach(p => {
-      /* ── Compute spring target: rotated sphere surface ── */
-      let [tx, ty, tz] = ry(p.ox, p.oy, p.oz, autoY + gazeY);
-      [tx, ty, tz] = rx(tx, ty, tz, gazeX);
-      tx *= pulse; ty *= pulse; tz *= pulse;
-
-      /* ── Cursor dimple: pull nearby dots toward mouse ── */
-      if(inside){
-        const scNow = FOV / (FOV + p.z * sR);
-        const px2d  = p.x * sR * scNow + CX;
-        const py2d  = p.y * sR * scNow + CY;
-        const dx    = lmx - px2d,  dy = lmy - py2d;
-        const d2    = dx * dx + dy * dy;
-        const TR    = 80; /* attraction radius in px */
-        if(d2 < TR * TR){
-          const d   = Math.sqrt(d2);
-          const str = (1 - d / TR) * 0.075;
-          /* push in 2D-projected direction + toward viewer */
-          p.vx += (dx / (sR * scNow)) * str;
-          p.vy += (dy / (sR * scNow)) * str;
-          p.vz += (1  -  d / TR)      * 0.10;
-        }
-      }
-
-      /* Spring toward rotated target */
-      p.vx += (tx - p.x) * 0.12;
-      p.vy += (ty - p.y) * 0.12;
-      p.vz += (tz - p.z) * 0.12;
-      /* Damping */
-      p.vx *= 0.78; p.vy *= 0.78; p.vz *= 0.78;
-      p.x  += p.vx; p.y  += p.vy; p.z  += p.vz;
-
-      /* ── Project to 2D ── */
-      const sc  = FOV / (FOV + p.z * sR);
-      const px  = p.x * sR * sc + CX;
-      const py  = p.y * sR * sc + CY;
-      const dep = (p.z + 1) * 0.5;           /* 0=back 1=front */
-      draw.push({
-        px, py,
-        sz:  Math.max(0.25, p.sz * sc),
-        alp: 0.07 + dep * 0.80,
-        col: p.col,
-        pz:  p.z,
-      });
-    });
-
-    /* Painter's sort: back → front */
-    draw.sort((a, b) => a.pz - b.pz);
-
-    /* Draw dots */
-    draw.forEach(d => {
-      ctx.globalAlpha = d.alp;
-      ctx.beginPath();
-      ctx.arc(d.px, d.py, d.sz, 0, Math.PI * 2);
-      ctx.fillStyle = d.col;
-      ctx.fill();
-    });
-    ctx.globalAlpha = 1;
-
-    /* Custom cursor when inside */
-    if(inside){
-      const g = ctx.createRadialGradient(lmx, lmy, 0, lmx, lmy, 48);
-      g.addColorStop(0, 'rgba(16,185,129,.15)');
-      g.addColorStop(1, 'rgba(16,185,129,0)');
-      ctx.beginPath(); ctx.arc(lmx, lmy, 48, 0, Math.PI * 2);
-      ctx.fillStyle = g; ctx.fill();
-      ctx.beginPath(); ctx.arc(lmx, lmy, 2.8, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(16,185,129,.9)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(lmx, lmy, 11, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(16,185,129,.28)';
-      ctx.lineWidth = 0.9; ctx.stroke();
-    }
-
-    requestAnimationFrame(frame);
-  }
-  frame();
-})();
 
 /* ═══ SCROLL PROGRESS + NAV ═══ */
 const prog = document.getElementById('scroll-progress');
